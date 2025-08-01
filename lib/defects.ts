@@ -1,490 +1,329 @@
-// Defect detection module API client and utilities
+import { DefectBatch, DefectData, DefectType, DefectSeverity } from '@/lib/types/Defect'
+import { defectAPI } from '@/lib/api/defects'
 
-import { 
-  DefectData, 
-  DefectBatch, 
-  DefectType, 
-  DefectSeverity,
-  DefectStatistics,
-  DefectVisualizationSettings,
-  DefectAnalysisResult,
-  DefectCluster
-} from '@/lib/types/Defect'
-
-export class DefectAPI {
-  private baseUrl: string
-
-  constructor(baseUrl: string = '/api') {
-    this.baseUrl = baseUrl
-  }
-
-  // Batches
-  async getBatches(): Promise<DefectBatch[]> {
-    try {
-      // First try to get batch list from dumps directory
-      const batchListResponse = await fetch('/dumps/batch_list.json')
-      if (batchListResponse.ok) {
-        const batchNames = await batchListResponse.json()
-        if (Array.isArray(batchNames)) {
-          // Convert batch names to DefectBatch objects
-          const batches: DefectBatch[] = []
-          
-          for (const batchName of batchNames) {
-            try {
-              // Try to get metadata for each batch
-              const metaResponse = await fetch(`/dumps/${batchName}/defects.meta.json`)
-              let batchInfo: any = {}
-              
-              if (metaResponse.ok) {
-                const metadata = await metaResponse.json()
-                batchInfo = metadata.batch_info || {}
-              }
-              
-              // Get defects count
-              const defectsResponse = await fetch(`/dumps/${batchName}/defects.json`)
-              let defectCount = 0
-              if (defectsResponse.ok) {
-                const defects = await defectsResponse.json()
-                defectCount = Array.isArray(defects) ? defects.length : 0
-              }
-              
-              // Parse batch name (assuming format: ProductName-BatchNumber)
-              const dashIndex = batchName.indexOf('-')
-              const productName = dashIndex > 0 ? batchName.substring(0, dashIndex) : 'Unknown Product'
-              const batchNumber = dashIndex > 0 ? batchName.substring(dashIndex + 1) : batchName
-              
-              batches.push({
-                id: batchName,
-                batch_name: batchInfo.batchNo || batchName,
-                product_name: batchInfo.productName || productName,
-                batch_number: batchInfo.batchNo || batchNumber,
-                scan_date: batchInfo.inspectionStartTime || new Date().toISOString(),
-                metadata: batchInfo,
-                defect_count: defectCount,
-                quality_score: this.calculateQualityScore(defectCount),
-                created_at: new Date().toISOString(),
-                updated_at: new Date().toISOString(),
-                organization_id: 'dumps',
-                user_id: 'system'
-              })
-            } catch (error) {
-              console.warn(`Failed to load metadata for batch ${batchName}:`, error)
-              // Create basic batch info even if metadata fails
-              const dashIndex = batchName.indexOf('-')
-              const productName = dashIndex > 0 ? batchName.substring(0, dashIndex) : 'Unknown Product'
-              const batchNumber = dashIndex > 0 ? batchName.substring(dashIndex + 1) : batchName
-              
-              batches.push({
-                id: batchName,
-                batch_name: batchName,
-                product_name: productName,
-                batch_number: batchNumber,
-                scan_date: new Date().toISOString(),
-                metadata: {},
-                defect_count: 0,
-                quality_score: 100,
-                created_at: new Date().toISOString(),
-                updated_at: new Date().toISOString(),
-                organization_id: 'dumps',
-                user_id: 'system'
-              })
-            }
-          }
-          
-          return batches
-        }
-      }
-    } catch (error) {
-      console.warn('Failed to fetch from dumps directory, falling back to API:', error)
-    }
-    
-    // Fallback to original API approach
-    const response = await fetch(`${this.baseUrl}/defects/batches`)
-    if (!response.ok) {
-      throw new Error(`Failed to fetch batches: ${response.statusText}`)
-    }
-    const data = await response.json()
-    return Array.isArray(data) ? data : []
-  }
-  
-  private calculateQualityScore(defectCount: number): number {
-    // Simple quality score calculation - could be made more sophisticated
-    if (defectCount === 0) return 100
-    if (defectCount < 10) return 90
-    if (defectCount < 25) return 80
-    if (defectCount < 50) return 70
-    if (defectCount < 100) return 60
-    return 50
-  }
-
-  async getBatch(id: string): Promise<DefectBatch> {
-    try {
-      // First try to get batch from dumps directory
-      const metaResponse = await fetch(`/dumps/${id}/defects.meta.json`)
-      if (metaResponse.ok) {
-        const metadata = await metaResponse.json()
-        const batchInfo = metadata.batch_info || {}
-        
-        // Get defects count
-        const defectsResponse = await fetch(`/dumps/${id}/defects.json`)
-        let defectCount = 0
-        if (defectsResponse.ok) {
-          const defects = await defectsResponse.json()
-          defectCount = Array.isArray(defects) ? defects.length : 0
-        }
-        
-        // Parse batch name
-        const dashIndex = id.indexOf('-')
-        const productName = dashIndex > 0 ? id.substring(0, dashIndex) : 'Unknown Product'
-        const batchNumber = dashIndex > 0 ? id.substring(dashIndex + 1) : id
-        
-        return {
-          id: id,
-          batch_name: batchInfo.batchNo || id,
-          product_name: batchInfo.productName || productName,
-          batch_number: batchInfo.batchNo || batchNumber,
-          scan_date: batchInfo.inspectionStartTime || new Date().toISOString(),
-          metadata: batchInfo,
-          defect_count: defectCount,
-          quality_score: this.calculateQualityScore(defectCount),
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-          organization_id: 'dumps',
-          user_id: 'system'
-        }
-      }
-    } catch (error) {
-      console.warn(`Failed to fetch batch from dumps for ${id}, falling back to API:`, error)
-    }
-    
-    // Fallback to original API approach
-    const response = await fetch(`${this.baseUrl}/defects/batches/${id}`)
-    if (!response.ok) {
-      throw new Error(`Failed to fetch batch: ${response.statusText}`)
-    }
-    return response.json()
-  }
-
-  async createBatch(batch: Omit<DefectBatch, 'id' | 'created_at' | 'updated_at' | 'defect_count' | 'quality_score'>): Promise<DefectBatch> {
-    const response = await fetch(`${this.baseUrl}/defects/batches`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(batch)
-    })
-    if (!response.ok) {
-      throw new Error(`Failed to create batch: ${response.statusText}`)
-    }
-    return response.json()
-  }
-
-  async updateBatch(id: string, updates: Partial<DefectBatch>): Promise<DefectBatch> {
-    const response = await fetch(`${this.baseUrl}/defects/batches/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updates)
-    })
-    if (!response.ok) {
-      throw new Error(`Failed to update batch: ${response.statusText}`)
-    }
-    return response.json()
-  }
-
-  async deleteBatch(id: string): Promise<void> {
-    const response = await fetch(`${this.baseUrl}/defects/batches/${id}`, {
-      method: 'DELETE'
-    })
-    if (!response.ok) {
-      throw new Error(`Failed to delete batch: ${response.statusText}`)
-    }
-  }
-
-  // Defect Data
-  async getDefectsForBatch(batchId: string): Promise<DefectData[]> {
-    try {
-      // First try to get defects from dumps directory
-      const defectsResponse = await fetch(`/dumps/${batchId}/defects.json`)
-      if (defectsResponse.ok) {
-        const defects = await defectsResponse.json()
-        if (Array.isArray(defects)) {
-          // Convert the dump format to DefectData format
-          return defects.map((defect: any, index: number) => ({
-            id: `${batchId}_${index}`,
-            batch_id: batchId,
-            coord_x: defect.coord_x || 0,
-            coord_y: defect.coord_y || 0,
-            defect_type: this.mapDefectType(defect.label || 'UNKNOWN'),
-            confidence: defect.label_probs?.[0] || (defect.HighConfidence ? 0.9 : 0.5),
-            severity: this.mapSeverity(defect['等級'] || defect.severity || 2),
-            label: this.mapDefectType(defect.label) || defect['缺陷名稱'] || 'Unknown defect',
-            properties: {
-              img_path: defect.img_path,
-              labels: defect.labels,
-              label_probs: defect.label_probs,
-              HighConfidence: defect.HighConfidence,
-              Group: defect['組'],
-              Circuit: defect['判定回路'],
-              Width: defect['外接宽度'],
-              Length: defect['外接长度'],
-              ...defect.properties
-            },
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-            organization_id: 'dumps'
-          }))
-        }
-      }
-    } catch (error) {
-      console.warn(`Failed to fetch defects from dumps for batch ${batchId}, falling back to API:`, error)
-    }
-    
-    // Fallback to original API approach
-    const response = await fetch(`${this.baseUrl}/defects/batches/${batchId}/defects`)
-    if (!response.ok) {
-      throw new Error(`Failed to fetch defects: ${response.statusText}`)
-    }
-    const data = await response.json()
-    return Array.isArray(data) ? data : []
-  }
-  
-  private mapDefectType(type: string): string {
-    // Map different defect type formats to our enum, including Chinese labels
-    const typeMap: Record<string, string> = {
-      // English mappings (matching DefectType enum values)
-      // 'surface_crack': 'surface_crack',
-      // 'bubble': 'bubble',
-      // 'contamination': 'contamination',
-      // 'delamination': 'delamination',
-      // 'wrinkle': 'wrinkle',
-      // 'hole': 'hole',
-      // 'scratch': 'scratch',
-      // 'stain': 'other',
-      // Chinese mappings based on the data
-      'A-空氣陷入': 'bubble',
-      'B-下流膠': 'deformation',
-      'C-膠渣': 'contamination',
-      'D-滾輪白點': 'spots',
-      'E-烘箱氣泡': 'bubble',
-      'F-PET不良': 'surface_defect',
-      'G-油滴': 'oil',
-      'H-毛屑': 'contamination',
-      'I-色差': 'discoloration',
-      'J-刮傷': 'scratch',
-      'K-印痕': 'indent',
-      'L-斑馬紋': 'wrinkle',
-      'M-常規顆粒': 'contamination',
-      'Uncertain': 'other',
-    }
-    
-    // First try exact match
-    if (typeMap[type]) {
-      return typeMap[type]
-    }
-    
-    // Then try lowercase match
-    const lowerType = type.toLowerCase()
-    if (typeMap[lowerType]) {
-      return typeMap[lowerType]
-    }
-    
-    // Finally try normalized match
-    const normalizedType = lowerType.replace(/[^a-z\u4e00-\u9fff]/g, '_')
-    return typeMap[normalizedType] || 'contamination' // Default to contamination for particle defects
-  }
-  
-  private mapSeverity(severity: string | number): string {
-    // Handle numeric severity levels (from the data: 等級 field)
-    if (typeof severity === 'number') {
-      if (severity <= 1) return 'LOW'
-      if (severity <= 2) return 'MEDIUM'
-      if (severity <= 3) return 'HIGH'
-      return 'CRITICAL'
-    }
-    
-    // Map different severity formats
-    const severityMap: Record<string, string> = {
-      'low': 'LOW',
-      'medium': 'MEDIUM', 
-      'high': 'HIGH',
-      'critical': 'CRITICAL',
-      '1': 'LOW',
-      '2': 'MEDIUM',
-      '3': 'HIGH',
-      '4': 'CRITICAL'
-    }
-    
-    return severityMap[severity.toString().toLowerCase()] || 'MEDIUM'
-  }
-
-  // private mapDefectAttributes(attribute: string): string {
-  //   const attributeMap: Record<string, string> = {
-  //     '組': 'Group',
-  //     '判定回路': 'Circuit',
-  //     '外接宽度': 'Width',
-  //     '外接长度': 'Length',
-  //   }
-
-  //   return attributeMap[attribute.toString()] || 'Attribute'
-  // }
-
-  async getDefectData(id: string): Promise<DefectData> {
-    const response = await fetch(`${this.baseUrl}/defects/data/${id}`)
-    if (!response.ok) {
-      throw new Error(`Failed to fetch defect: ${response.statusText}`)
-    }
-    return response.json()
-  }
-
-  async createDefectData(defects: Omit<DefectData, 'id' | 'created_at' | 'updated_at'>[]): Promise<DefectData[]> {
-    const response = await fetch(`${this.baseUrl}/defects/data`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(defects)
-    })
-    if (!response.ok) {
-      throw new Error(`Failed to create defects: ${response.statusText}`)
-    }
-    const data = await response.json()
-    return Array.isArray(data) ? data : [data]
-  }
-
-  async updateDefectData(id: string, updates: Partial<DefectData>): Promise<DefectData> {
-    const response = await fetch(`${this.baseUrl}/defects/data/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updates)
-    })
-    if (!response.ok) {
-      throw new Error(`Failed to update defect: ${response.statusText}`)
-    }
-    return response.json()
-  }
-
-  async deleteDefectData(id: string): Promise<void> {
-    const response = await fetch(`${this.baseUrl}/defects/data/${id}`, {
-      method: 'DELETE'
-    })
-    if (!response.ok) {
-      throw new Error(`Failed to delete defect: ${response.statusText}`)
-    }
-  }
-
-  // File Upload
-  async uploadDefectData(batchId: string, file: File): Promise<DefectData[]> {
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('batchId', batchId)
-
-    const response = await fetch(`${this.baseUrl}/defects/upload`, {
-      method: 'POST',
-      body: formData
-    })
-    if (!response.ok) {
-      throw new Error(`Failed to upload defects: ${response.statusText}`)
-    }
-    const data = await response.json()
-    return Array.isArray(data) ? data : []
-  }
-
-  // Statistics and Analysis
-  async getBatchStatistics(batchId: string): Promise<DefectStatistics> {
-    const response = await fetch(`${this.baseUrl}/defects/batches/${batchId}/statistics`)
-    if (!response.ok) {
-      throw new Error(`Failed to get statistics: ${response.statusText}`)
-    }
-    return response.json()
-  }
-
-  async analyzeBatch(batchId: string): Promise<DefectAnalysisResult> {
-    const response = await fetch(`${this.baseUrl}/defects/batches/${batchId}/analyze`, {
-      method: 'POST'
-    })
-    return response.json()
-  }
-
-  async findDefectClusters(batchId: string, options?: {
-    min_cluster_size?: number
-    max_distance?: number
-  }): Promise<DefectCluster[]> {
-    const queryParams = options ? '?' + new URLSearchParams(
-      Object.entries(options).map(([k, v]) => [k, v.toString()])
-    ).toString() : ''
-    
-    const response = await fetch(`${this.baseUrl}/defects/batches/${batchId}/clusters${queryParams}`)
-    return response.json()
-  }
-
-  // Visualization helpers
-  async getVisualizationData(batchId: string, settings?: DefectVisualizationSettings): Promise<{
-    defects: DefectData[]
-    bounds: { min_x: number; max_x: number; min_y: number; max_y: number }
-    statistics: DefectStatistics
-  }> {
-    const response = await fetch(`${this.baseUrl}/defects/batches/${batchId}/visualization`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(settings || {})
-    })
-    return response.json()
-  }
-
-  // Export functions
-  async exportBatchData(batchId: string, format: 'csv' | 'json' | 'excel'): Promise<Blob> {
-    const response = await fetch(`${this.baseUrl}/defects/batches/${batchId}/export?format=${format}`)
-    return response.blob()
-  }
-
-  async exportStatistics(batchId: string, format: 'pdf' | 'csv'): Promise<Blob> {
-    const response = await fetch(`${this.baseUrl}/defects/batches/${batchId}/statistics/export?format=${format}`)
-    return response.blob()
+// Defect Batches API
+export async function getDefectBatches(organizationId: string): Promise<DefectBatch[]> {
+  try {
+    return await defectAPI.getBatches()
+  } catch (error) {
+    console.error('Error fetching defect batches:', error)
+    throw new Error(`Failed to fetch defect batches`)
   }
 }
 
-// Utility functions for defect analysis
-export const defectUtils = {
-  calculateDefectDensity: (defects: DefectData[], area: number): number => {
-    return defects.length / area
-  },
+export async function getDefectBatch(id: string): Promise<DefectBatch | null> {
+  try {
+    return await defectAPI.getBatch(id)
+  } catch (error) {
+    console.error('Error fetching defect batch:', error)
+    return null
+  }
+}
 
-  groupDefectsByType: (defects: DefectData[]): Record<DefectType, DefectData[]> => {
-    return defects.reduce((acc, defect) => {
-      if (!acc[defect.defect_type]) {
-        acc[defect.defect_type] = []
-      }
-      acc[defect.defect_type].push(defect)
+export async function createDefectBatch(batch: Omit<DefectBatch, 'id' | 'created_at' | 'updated_at' | 'defect_count' | 'quality_score'>): Promise<DefectBatch> {
+  try {
+    return await defectAPI.createBatch(batch)
+  } catch (error) {
+    console.error('Error creating defect batch:', error)
+    throw new Error(`Failed to create defect batch`)
+  }
+}
+
+export async function updateDefectBatch(id: string, updates: Partial<DefectBatch>): Promise<DefectBatch> {
+  try {
+    return await defectAPI.updateBatch(id, updates)
+  } catch (error) {
+    console.error('Error updating defect batch:', error)
+    throw new Error(`Failed to update defect batch`)
+  }
+}
+
+export async function deleteDefectBatch(id: string): Promise<void> {
+  try {
+    await defectAPI.deleteBatch(id)
+  } catch (error) {
+    console.error('Error deleting defect batch:', error)
+    throw new Error(`Failed to delete defect batch`)
+  }
+}
+
+// Defect Data API
+export async function getDefectData(organizationId: string, batchId?: string): Promise<DefectData[]> {
+  try {
+    if (batchId) {
+      return await defectAPI.getDefectsForBatch(batchId)
+    }
+    // For now, we need to get all batches and then get defects for each
+    // This is not optimal but maintains compatibility
+    const batches = await defectAPI.getBatches()
+    const allDefects: DefectData[] = []
+    for (const batch of batches) {
+      const defects = await defectAPI.getDefectsForBatch(batch.id)
+      allDefects.push(...defects)
+    }
+    return allDefects
+  } catch (error) {
+    console.error('Error fetching defect data:', error)
+    throw new Error(`Failed to fetch defect data`)
+  }
+}
+
+export async function getDefect(id: string): Promise<DefectData | null> {
+  try {
+    return await defectAPI.getDefectData(id)
+  } catch (error) {
+    console.error('Error fetching defect:', error)
+    return null
+  }
+}
+
+export async function createDefectData(defect: Omit<DefectData, 'id' | 'created_at' | 'updated_at'>): Promise<DefectData> {
+  try {
+    const defects = await defectAPI.createDefectData([defect])
+    return defects[0]
+  } catch (error) {
+    console.error('Error creating defect data:', error)
+    throw new Error(`Failed to create defect data`)
+  }
+}
+
+export async function createBulkDefectData(defects: Omit<DefectData, 'id' | 'created_at' | 'updated_at'>[]): Promise<DefectData[]> {
+  try {
+    return await defectAPI.createDefectData(defects)
+  } catch (error) {
+    console.error('Error creating bulk defect data:', error)
+    throw new Error(`Failed to create bulk defect data`)
+  }
+}
+
+export async function updateDefectData(id: string, updates: Partial<DefectData>): Promise<DefectData> {
+  try {
+    return await defectAPI.updateDefectData(id, updates)
+  } catch (error) {
+    console.error('Error updating defect data:', error)
+    throw new Error(`Failed to update defect data`)
+  }
+}
+
+export async function deleteDefectData(id: string): Promise<void> {
+  try {
+    await defectAPI.deleteDefectData(id)
+  } catch (error) {
+    console.error('Error deleting defect data:', error)
+    throw new Error(`Failed to delete defect data`)
+  }
+}
+
+// Analytics and Statistics API
+export async function getDefectStatistics(organizationId: string, batchId?: string) {
+  try {
+    if (batchId) {
+      return await defectAPI.getBatchStatistics(batchId)
+    }
+    
+    // For organization-wide statistics, we need to aggregate from all batches
+    const batches = await defectAPI.getBatches()
+    let allDefects: any[] = []
+    
+    for (const batch of batches) {
+      const defects = await defectAPI.getDefectsForBatch(batch.id)
+      allDefects = allDefects.concat(defects)
+    }
+    
+    // Calculate statistics
+    const totalDefects = allDefects.length
+    const highSeverityDefects = allDefects.filter(d => 
+      d.severity === DefectSeverity.HIGH || d.severity === DefectSeverity.CRITICAL
+    ).length
+
+    const averageConfidence = allDefects.length > 0 
+      ? allDefects.reduce((sum, d) => sum + d.confidence, 0) / allDefects.length 
+      : 0
+
+    // Group by defect type
+    const defectTypeDistribution = allDefects.reduce((acc, defect) => {
+      acc[defect.defect_type] = (acc[defect.defect_type] || 0) + 1
       return acc
-    }, {} as Record<DefectType, DefectData[]>)
-  },
+    }, {} as Record<DefectType, number>)
 
-  filterDefectsByConfidence: (defects: DefectData[], minConfidence: number): DefectData[] => {
-    return defects.filter(defect => defect.confidence >= minConfidence)
-  },
+    // Group by severity
+    const severityDistribution = allDefects.reduce((acc, defect) => {
+      acc[defect.severity] = (acc[defect.severity] || 0) + 1
+      return acc
+    }, {} as Record<DefectSeverity, number>)
 
-  calculateAverageConfidence: (defects: DefectData[]): number => {
-    if (defects.length === 0) return 0
-    return defects.reduce((sum, defect) => sum + defect.confidence, 0) / defects.length
-  },
-
-  getSeverityScore: (severity: DefectSeverity): number => {
-    const scores = {
-      [DefectSeverity.LOW]: 1,
-      [DefectSeverity.MEDIUM]: 2,
-      [DefectSeverity.HIGH]: 3,
-      [DefectSeverity.CRITICAL]: 4
+    return {
+      totalDefects,
+      highSeverityDefects,
+      averageConfidence: Math.round(averageConfidence * 100) / 100,
+      defectTypeDistribution,
+      severityDistribution
     }
-    return scores[severity]
-  },
-
-  calculateQualityScore: (defects: DefectData[]): number => {
-    if (defects.length === 0) return 100
-    
-    const totalSeverity = defects.reduce((sum, defect) => 
-      sum + defectUtils.getSeverityScore(defect.severity), 0
-    )
-    const maxPossibleSeverity = defects.length * 4 // Critical = 4
-    
-    return Math.max(0, 100 - (totalSeverity / maxPossibleSeverity) * 100)
+  } catch (error) {
+    console.error('Error fetching defect statistics:', error)
+    throw new Error(`Failed to fetch defect statistics`)
   }
 }
 
-// Create singleton instance
-export const defectAPI = new DefectAPI()
+export async function getBatchQualityTrends(organizationId: string, days: number = 30) {
+  try {
+    const batches = await defectAPI.getBatches()
+    const startDate = new Date()
+    startDate.setDate(startDate.getDate() - days)
+    
+    // Filter batches by date range
+    const filteredBatches = batches.filter(batch => {
+      const batchDate = new Date(batch.scan_date)
+      return batchDate >= startDate
+    })
+    
+    // Sort by scan_date
+    filteredBatches.sort((a, b) => 
+      new Date(a.scan_date).getTime() - new Date(b.scan_date).getTime()
+    )
+    
+    return filteredBatches.map(batch => ({
+      scan_date: batch.scan_date,
+      quality_score: batch.quality_score,
+      defect_count: batch.defect_count,
+      product_name: batch.product_name
+    }))
+  } catch (error) {
+    console.error('Error fetching quality trends:', error)
+    throw new Error(`Failed to fetch quality trends`)
+  }
+}
+
+export async function getDefectHeatmapData(batchId: string) {
+  try {
+    const defects = await defectAPI.getDefectsForBatch(batchId)
+    return defects.map(defect => ({
+      coord_x: defect.coord_x,
+      coord_y: defect.coord_y,
+      defect_type: defect.defect_type,
+      severity: defect.severity,
+      confidence: defect.confidence
+    }))
+  } catch (error) {
+    console.error('Error fetching defect heatmap data:', error)
+    throw new Error(`Failed to fetch defect heatmap data`)
+  }
+}
+
+// Search and filtering
+export async function searchDefectBatches(organizationId: string, query: string): Promise<DefectBatch[]> {
+  try {
+    const batches = await defectAPI.getBatches()
+    const lowerQuery = query.toLowerCase()
+    
+    // Filter batches based on search query
+    const filtered = batches.filter(batch => 
+      batch.batch_name?.toLowerCase().includes(lowerQuery) ||
+      batch.product_name?.toLowerCase().includes(lowerQuery) ||
+      batch.batch_number?.toLowerCase().includes(lowerQuery)
+    )
+    
+    // Sort by scan_date descending
+    filtered.sort((a, b) => 
+      new Date(b.scan_date).getTime() - new Date(a.scan_date).getTime()
+    )
+    
+    return filtered
+  } catch (error) {
+    console.error('Error searching defect batches:', error)
+    throw new Error(`Failed to search defect batches`)
+  }
+}
+
+export async function filterDefectsByType(organizationId: string, defectType: DefectType): Promise<DefectData[]> {
+  try {
+    // Get all defects from all batches and filter by type
+    const batches = await defectAPI.getBatches()
+    let allDefects: DefectData[] = []
+    
+    for (const batch of batches) {
+      const defects = await defectAPI.getDefectsForBatch(batch.id)
+      const filtered = defects.filter(d => d.defect_type === defectType)
+      allDefects = allDefects.concat(filtered)
+    }
+    
+    // Sort by created_at descending
+    allDefects.sort((a, b) => 
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
+    
+    return allDefects
+  } catch (error) {
+    console.error('Error filtering defects by type:', error)
+    throw new Error(`Failed to filter defects by type`)
+  }
+}
+
+export async function filterDefectsBySeverity(organizationId: string, severity: DefectSeverity): Promise<DefectData[]> {
+  try {
+    // Get all defects from all batches and filter by severity
+    const batches = await defectAPI.getBatches()
+    let allDefects: DefectData[] = []
+    
+    for (const batch of batches) {
+      const defects = await defectAPI.getDefectsForBatch(batch.id)
+      const filtered = defects.filter(d => d.severity === severity)
+      allDefects = allDefects.concat(filtered)
+    }
+    
+    // Sort by created_at descending
+    allDefects.sort((a, b) => 
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
+    
+    return allDefects
+  } catch (error) {
+    console.error('Error filtering defects by severity:', error)
+    throw new Error(`Failed to filter defects by severity`)
+  }
+}
+
+// Batch processing and file upload support
+export async function processDefectFile(
+  organizationId: string, 
+  userId: string,
+  fileData: {
+    batch_name: string
+    product_name: string
+    batch_number: string
+    scan_date: string
+    defects: Array<{
+      coord_x: number
+      coord_y: number
+      defect_type: DefectType
+      confidence: number
+      severity: DefectSeverity
+      label?: string
+      properties?: Record<string, any>
+    }>
+    metadata?: Record<string, any>
+  }
+): Promise<{ batch: DefectBatch; defects: DefectData[] }> {
+  // For file upload, we'll use the upload endpoint
+  // First create the batch
+  const batch = await createDefectBatch({
+    batch_name: fileData.batch_name,
+    product_name: fileData.product_name,
+    batch_number: fileData.batch_number,
+    scan_date: new Date(fileData.scan_date),
+    metadata: fileData.metadata || {},
+    organization_id: organizationId,
+    user_id: userId
+  })
+
+  // Create defects in bulk
+  const defectsToCreate = fileData.defects.map(defect => ({
+    ...defect,
+    batch_id: batch.id,
+    organization_id: organizationId
+  }))
+
+  const defects = await createBulkDefectData(defectsToCreate)
+
+  return { batch, defects }
+}

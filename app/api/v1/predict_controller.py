@@ -3,7 +3,7 @@ Description:
 Author: liyu
 Version: 
 Date: 2025-08-11 00:04:44
-LastEditTime: 2025-08-16 22:51:32
+LastEditTime: 2025-08-17 10:19:06
 '''
 from fastapi import APIRouter, HTTPException
 from app.schemas.request.predict_payload import PredictPayload
@@ -17,7 +17,7 @@ predict_router = APIRouter()
 
 @predict_router.post("/generate/predictions", response_model=PredictionResponse)
 def predict(payload: PredictPayload):
-    logger.info("Received prediction reques:", payload)
+    logger.info(f"Received prediction reques: {payload}")
     try:
         predictions = predict_by_model_id(payload)
     except FileNotFoundError:
@@ -27,7 +27,7 @@ def predict(payload: PredictPayload):
         logger.warning(f"Missing input field: {e}")
         raise HTTPException(status_code=400, detail=f"Miss input field: {e}")
     except Exception as e:
-        logger.exception("Unhandled exception during prediction")
+        logger.exception(f"Unhandled exception during prediction")
         raise HTTPException(status_code=500, detail=str(e))
 
     logger.info(f"Prediction result: {predictions}")

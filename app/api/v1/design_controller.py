@@ -9,7 +9,7 @@ design_router = APIRouter()
 
 @design_router.post("/query/samples", response_model=DesignResponse)
 def query_samples(payload: DesignPayload):
-    logger.info("Received prediction reques:", payload)
+    logger.info(f"Received prediction reques: {payload}")
     try:
         df = fetch_cluster_by_model_id(payload)
     except FileNotFoundError:
@@ -19,10 +19,10 @@ def query_samples(payload: DesignPayload):
         logger.warning(f"Missing input field: {e}")
         raise HTTPException(status_code=400, detail=f"Miss input field: {e}")
     except Exception as e:
-        logger.exception("Unhandled exception during prediction")
+        logger.exception(f"Unhandled exception during prediction")
         raise HTTPException(status_code=500, detail=str(e))
 
-    logger.debug("datfetch_cluster_by_model_id result:", df)
+    logger.debug(f"datfetch_cluster_by_model_id result: {df}")
 
     samples = []
     clusters = []
@@ -86,6 +86,6 @@ def query_samples(payload: DesignPayload):
             database_time_ms=0,
         )
     )
-    logger.info("Design Response:", response)
+    logger.info(f"Design Response: {response}")
 
     return response

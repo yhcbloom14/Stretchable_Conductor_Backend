@@ -85,18 +85,18 @@ class AnnS0Eps10Handler(BaseModelHandler):
             "Pre-stretch": pre_strain,
             "thickness": thickness,
         }
-        logger.info("Converted features:", features)
+        logger.info(f"Converted features: {features}")
         df = pd.DataFrame([features])
         expected_columns = ["CNT", "MXN", "GNP", "PVA", "1D", "2D", "2D1D", "2D2D", "Pre-stretch", "thickness"]
         df = df[expected_columns]
         return df
 
     def predict(self, input_item: PredictInputItem):
-        logger.info("Predicting for input:", input_item)
+        logger.info(f"Predicting for input: {input_item}")
         df = self._convert_input_to_df(input_item)
         feasibility = self._is_feasible(df)
         if not feasibility:
-            logger.info("Material combination is not feasible.")
+            logger.info(f"Material combination is not feasible.")
             return {
                 "Feasibility": False,
                 "S₀ (mS)": None,
@@ -109,17 +109,17 @@ class AnnS0Eps10Handler(BaseModelHandler):
         eps10_preds = [m.predict(df) * 100 for m in self.ann_eps10_models]
         eps10_mean = np.mean(eps10_preds, axis=0)
         eps10_covar = np.std(eps10_preds, axis=0) / eps10_mean * 100
-        logger.info("eps:", eps10_mean.item())
+        logger.info(f"eps: {eps10_mean.item()}")
 
         # predict s0
         s0_preds = [1000 / m.predict(df) for m in self.ann_s0_models]
         s0_mean = np.mean(s0_preds, axis=0)
         s0_covar = np.std(s0_preds, axis=0) / s0_mean * 100
-        logger.info("s0:", s0_mean.item())
+        logger.info(f"s0: {s0_mean.item()}")
 
         # uncertainty
         uncertainty = np.mean([eps10_covar, s0_covar])
-        logger.info("uncertainty:", uncertainty)
+        logger.info(f"uncertainty: {uncertainty}")
 
         return {
             "Feasibility": True,

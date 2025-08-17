@@ -44,7 +44,14 @@ def query_samples(payload: DesignPayload):
 
         #Deformation Sequence
         morpho_fields = ["1D", "2D", "2D1D", "2D2D"]
-        morphology = next((m for m in morpho_fields if row.get(m, 0) == 1))
+        morphology_raw  = next((m for m in morpho_fields if row.get(m, 0) == 1))
+        morpho_map = {
+            "1D": "G₁–1D",
+            "2D": "G₁–2D",
+            "2D1D": "G₂–2D1D",
+            "2D2D": "G₂–2D2D"
+        }
+        morphology = morpho_map.get(morphology_raw, morphology_raw)
 
         cluster = {
             "id": idx,
@@ -57,8 +64,8 @@ def query_samples(payload: DesignPayload):
                 },
                 "parameters": {
                     "Deformation Sequence": morphology,
-                    "Applied Pre-Strain": int(row["Applied Pre-Strain"]),
-                    "Thickness": int(row["Thickness"])
+                    "Applied Pre-Strain": f"{int(row['Applied Pre-Strain']):,}",
+                    "Thickness": f"{int(row['Thickness']):,}"
                 }
             },
             "predictions": {

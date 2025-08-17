@@ -1,0 +1,32 @@
+{
+    "code": 0,
+    "message": "OK",
+    "data": {
+        "predictions": [
+            {
+                "id": 0,
+                "inputs": [
+                    {
+                        "materials": {
+                            "MXene": 26,
+                            "SWNT": 33,
+                            "AuNP": 30.4,
+                            "PVA": 10.6
+                        },
+                        "parameters": {
+                            "Deformation Sequence": "G₁–1D",
+                            "Applied Pre-Strain": "100",
+                            "Thickness": "1,200"
+                        }
+                    }
+                ],
+                "predictions": {
+                    "Feasibility": true,
+                    "S₀ (mS)": 5.54,
+                    "ε₁₀﹪ (%)": 141.75,
+                    "Prediction Uncertainty (%)": 2.63
+                }
+            }
+        ]
+    }
+}

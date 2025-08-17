@@ -1,0 +1,17 @@
+{
+  "project_id": "p5",
+  "model_id": "v1124",
+  "data": {
+    "inputs": [
+      {
+        "materials": { "MXene": 26, "SWNT": 33, "AuNP": 30.4, "PVA": 10.6 },
+        "parameters": {
+          "Deformation Sequence": "G₁–1D",
+          "Applied Pre-Strain": "100",
+          "Thickness": "1,200"
+        }
+      }
+    ]
+  },
+  "api_key": "egr0781kyz4cokoh3vv7zq40k3stczdt"
+}

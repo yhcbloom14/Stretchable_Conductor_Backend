@@ -1,0 +1,155 @@
+{
+    "project_id": "p5",
+    "model_id": "v1124",
+    "inputs": {
+        "filters": {
+            "material": {
+                "required_materials": [],
+                "excluded_materials": [],
+                "ranges": {
+                    "MXene": {
+                        "min": 0,
+                        "max": 100
+                    },
+                    "SWNT": {
+                        "min": 0,
+                        "max": 100
+                    },
+                    "AuNP": {
+                        "min": 0,
+                        "max": 100
+                    },
+                    "PVA": {
+                        "min": 0,
+                        "max": 100
+                    }
+                }
+            },
+            "parameter": {
+                "Deformation Sequence": {
+                    "choices": [
+                        "G₁–1D",
+                        "G₁–2D",
+                        "G₂–2D1D",
+                        "G₂–2D2D"
+                    ]
+                },
+                "Applied Pre-Strain": {
+                    "choices": [
+                        "0",
+                        "100",
+                        "200",
+                        "300"
+                    ]
+                },
+                "Thickness": {
+                    "choices": [
+                        "800",
+                        "1,200",
+                        "1,600"
+                    ]
+                }
+            },
+            "target": {
+                "S₀ (mS)": {
+                    "min": 2.62,
+                    "max": 128.26
+                },
+                "ε₁₀﹪ (%)": {
+                    "min": 25.53,
+                    "max": 691.06
+                }
+            },
+            "uncertainty_cutoff": 30
+        },
+        "prediction_targets": [
+            "S₀ (mS)",
+            "ε₁₀﹪ (%)"
+        ]
+    },
+    "options": {
+        "outputs": {
+            "clustering": {
+                "enabled": true
+            }
+        }
+    },
+    "api_key": "egr0781kyz4cokoh3vv7zq40k3stczdt"
+}{
+    "project_id": "p5",
+    "model_id": "v1124",
+    "inputs": {
+        "filters": {
+            "material": {
+                "required_materials": [],
+                "excluded_materials": [],
+                "ranges": {
+                    "MXene": {
+                        "min": 0,
+                        "max": 100
+                    },
+                    "SWNT": {
+                        "min": 0,
+                        "max": 100
+                    },
+                    "AuNP": {
+                        "min": 0,
+                        "max": 100
+                    },
+                    "PVA": {
+                        "min": 0,
+                        "max": 100
+                    }
+                }
+            },
+            "parameter": {
+                "Deformation Sequence": {
+                    "choices": [
+                        "G₁–1D",
+                        "G₁–2D",
+                        "G₂–2D1D",
+                        "G₂–2D2D"
+                    ]
+                },
+                "Applied Pre-Strain": {
+                    "choices": [
+                        "0",
+                        "100",
+                        "200",
+                        "300"
+                    ]
+                },
+                "Thickness": {
+                    "choices": [
+                        "800",
+                        "1,200",
+                        "1,600"
+                    ]
+                }
+            },
+            "target": {
+                "S₀ (mS)": {
+                    "min": 2.62,
+                    "max": 128.26
+                },
+                "ε₁₀﹪ (%)": {
+                    "min": 25.53,
+                    "max": 691.06
+                }
+            },
+            "uncertainty_cutoff": 30
+        },
+        "prediction_targets": [
+            "S₀ (mS)",
+            "ε₁₀﹪ (%)"
+        ]
+    },
+    "options": {
+        "outputs": {
+            "clustering": {
+                "enabled": true
+            }
+        }
+    },
+    "api_key": "egr0781kyz4cokoh3vv7zq40k3stczdt"
+}

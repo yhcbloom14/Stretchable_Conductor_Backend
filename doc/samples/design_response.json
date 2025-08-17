@@ -1,0 +1,769 @@
+{
+    "code": 0,
+    "message": "OK",
+    "data": {
+        "samples": [
+            {
+                "S₀ (mS)": 9.044407,
+                "ε₁₀﹪ (%)": 222.42284,
+                "Uncertainty": 0.03723716,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 13.388642,
+                "ε₁₀﹪ (%)": 330.3292,
+                "Uncertainty": 0.047151275,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 20.171295,
+                "ε₁₀﹪ (%)": 363.54156,
+                "Uncertainty": 0.048493736,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 7.787079,
+                "ε₁₀﹪ (%)": 569.00995,
+                "Uncertainty": 0.052058101,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 4.6383286,
+                "ε₁₀﹪ (%)": 369.08997,
+                "Uncertainty": 0.07849665,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 128.25856,
+                "ε₁₀﹪ (%)": 33.213894,
+                "Uncertainty": 0.112313887,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 31.230593,
+                "ε₁₀﹪ (%)": 200.16895,
+                "Uncertainty": 0.122385618,
+                "_cluster_id": 1
+            },
+            {
+                "S₀ (mS)": 22.91,
+                "ε₁₀﹪ (%)": 128.51642,
+                "Uncertainty": 0.131299389,
+                "_cluster_id": 1
+            },
+            {
+                "S₀ (mS)": 8.491879,
+                "ε₁₀﹪ (%)": 222.91624,
+                "Uncertainty": 0.139405525,
+                "_cluster_id": 1
+            },
+            {
+                "S₀ (mS)": 16.213448,
+                "ε₁₀﹪ (%)": 84.08989,
+                "Uncertainty": 0.141259978,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 4.7755003,
+                "ε₁₀﹪ (%)": 340.0765,
+                "Uncertainty": 0.153383807,
+                "_cluster_id": 8
+            },
+            {
+                "S₀ (mS)": 5.5785646,
+                "ε₁₀﹪ (%)": 66.979805,
+                "Uncertainty": 0.155512545,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 17.149641,
+                "ε₁₀﹪ (%)": 45.26128,
+                "Uncertainty": 0.163337788,
+                "_cluster_id": 2
+            },
+            {
+                "S₀ (mS)": 4.7485847,
+                "ε₁₀﹪ (%)": 345.28796,
+                "Uncertainty": 0.164926164,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 23.199327,
+                "ε₁₀﹪ (%)": 129.35979,
+                "Uncertainty": 0.16591599,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 6.5040727,
+                "ε₁₀﹪ (%)": 161.58803,
+                "Uncertainty": 0.16751138,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 4.668709,
+                "ε₁₀﹪ (%)": 346.2873,
+                "Uncertainty": 0.1703306,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 4.7125573,
+                "ε₁₀﹪ (%)": 341.4157,
+                "Uncertainty": 0.174623795,
+                "_cluster_id": 8
+            },
+            {
+                "S₀ (mS)": 17.155102,
+                "ε₁₀﹪ (%)": 44.96831,
+                "Uncertainty": 0.176089628,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 8.544096,
+                "ε₁₀﹪ (%)": 413.29956,
+                "Uncertainty": 0.17767625,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 4.7673445,
+                "ε₁₀﹪ (%)": 361.8171,
+                "Uncertainty": 0.18023986,
+                "_cluster_id": 0
+            },
+            {
+                "S₀ (mS)": 16.088034,
+                "ε₁₀﹪ (%)": 348.20206,
+                "Uncertainty": 0.1833436,
+                "_cluster_id": 5
+            },
+            {
+                "S₀ (mS)": 7.7861857,
+                "ε₁₀﹪ (%)": 587.5993,
+                "Uncertainty": 0.18426916,
+                "_cluster_id": 9
+            },
+            {
+                "S₀ (mS)": 6.971768,
+                "ε₁₀﹪ (%)": 216.60643,
+                "Uncertainty": 0.191698665,
+                "_cluster_id": 8
+            },
+            {
+                "S₀ (mS)": 9.307219,
+                "ε₁₀﹪ (%)": 62.774857,
+                "Uncertainty": 0.19185577,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 5.751723,
+                "ε₁₀﹪ (%)": 158.48668,
+                "Uncertainty": 0.19246002,
+                "_cluster_id": 9
+            },
+            {
+                "S₀ (mS)": 16.090302,
+                "ε₁₀﹪ (%)": 345.30893,
+                "Uncertainty": 0.194155155,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 12.700327,
+                "ε₁₀﹪ (%)": 229.62054,
+                "Uncertainty": 0.19510971,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 6.489511,
+                "ε₁₀﹪ (%)": 161.78415,
+                "Uncertainty": 0.198561675,
+                "_cluster_id": 0
+            },
+            {
+                "S₀ (mS)": 8.589858,
+                "ε₁₀﹪ (%)": 420.76492,
+                "Uncertainty": 0.20343895,
+                "_cluster_id": 8
+            },
+            {
+                "S₀ (mS)": 6.593743,
+                "ε₁₀﹪ (%)": 308.85953,
+                "Uncertainty": 0.207833665,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 9.904709,
+                "ε₁₀﹪ (%)": 189.4828,
+                "Uncertainty": 0.20936731,
+                "_cluster_id": 0
+            },
+            {
+                "S₀ (mS)": 4.4955897,
+                "ε₁₀﹪ (%)": 371.56015,
+                "Uncertainty": 0.21057433,
+                "_cluster_id": 8
+            },
+            {
+                "S₀ (mS)": 5.6353316,
+                "ε₁₀﹪ (%)": 157.12509,
+                "Uncertainty": 0.217690035,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 15.288464,
+                "ε₁₀﹪ (%)": 395.7763,
+                "Uncertainty": 0.21844915,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 8.651849,
+                "ε₁₀﹪ (%)": 415.51285,
+                "Uncertainty": 0.220580818,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 23.129562,
+                "ε₁₀﹪ (%)": 132.06732,
+                "Uncertainty": 0.221274545,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 6.0349526,
+                "ε₁₀﹪ (%)": 535.2081,
+                "Uncertainty": 0.222120335,
+                "_cluster_id": 2
+            },
+            {
+                "S₀ (mS)": 5.6095843,
+                "ε₁₀﹪ (%)": 194.83025,
+                "Uncertainty": 0.223126455,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 6.241468,
+                "ε₁₀﹪ (%)": 572.2684,
+                "Uncertainty": 0.224145145,
+                "_cluster_id": 9
+            },
+            {
+                "S₀ (mS)": 5.866057,
+                "ε₁₀﹪ (%)": 536.4521,
+                "Uncertainty": 0.225544935,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 15.340646,
+                "ε₁₀﹪ (%)": 389.79575,
+                "Uncertainty": 0.226466955,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 6.0339503,
+                "ε₁₀﹪ (%)": 551.22064,
+                "Uncertainty": 0.227973475,
+                "_cluster_id": 1
+            },
+            {
+                "S₀ (mS)": 6.3047266,
+                "ε₁₀﹪ (%)": 336.64536,
+                "Uncertainty": 0.229611435,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 6.4701123,
+                "ε₁₀﹪ (%)": 614.2717,
+                "Uncertainty": 0.232449585,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 10.399968,
+                "ε₁₀﹪ (%)": 325.6043,
+                "Uncertainty": 0.232613253,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 5.513666,
+                "ε₁₀﹪ (%)": 155.96986,
+                "Uncertainty": 0.23653147,
+                "_cluster_id": 0
+            },
+            {
+                "S₀ (mS)": 6.3845515,
+                "ε₁₀﹪ (%)": 160.61151,
+                "Uncertainty": 0.23721156,
+                "_cluster_id": 0
+            },
+            {
+                "S₀ (mS)": 6.6188354,
+                "ε₁₀﹪ (%)": 226.65086,
+                "Uncertainty": 0.237703535,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 12.65198,
+                "ε₁₀﹪ (%)": 229.68953,
+                "Uncertainty": 0.238950735,
+                "_cluster_id": 8
+            },
+            {
+                "S₀ (mS)": 5.420988,
+                "ε₁₀﹪ (%)": 189.40756,
+                "Uncertainty": 0.24619469,
+                "_cluster_id": 2
+            },
+            {
+                "S₀ (mS)": 5.5780787,
+                "ε₁₀﹪ (%)": 106.04057,
+                "Uncertainty": 0.247314865,
+                "_cluster_id": 5
+            },
+            {
+                "S₀ (mS)": 5.743513,
+                "ε₁₀﹪ (%)": 158.61604,
+                "Uncertainty": 0.250591775,
+                "_cluster_id": 9
+            },
+            {
+                "S₀ (mS)": 2.7899578,
+                "ε₁₀﹪ (%)": 365.87738,
+                "Uncertainty": 0.250647955,
+                "_cluster_id": 2
+            },
+            {
+                "S₀ (mS)": 8.674811,
+                "ε₁₀﹪ (%)": 408.3814,
+                "Uncertainty": 0.25124152,
+                "_cluster_id": 9
+            },
+            {
+                "S₀ (mS)": 6.501421,
+                "ε₁₀﹪ (%)": 249.3136,
+                "Uncertainty": 0.252367352,
+                "_cluster_id": 8
+            },
+            {
+                "S₀ (mS)": 4.621308,
+                "ε₁₀﹪ (%)": 348.05292,
+                "Uncertainty": 0.2523697,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 9.635938,
+                "ε₁₀﹪ (%)": 209.9364,
+                "Uncertainty": 0.25301525,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 9.630285,
+                "ε₁₀﹪ (%)": 212.77101,
+                "Uncertainty": 0.25338398,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 19.963669,
+                "ε₁₀﹪ (%)": 76.70356,
+                "Uncertainty": 0.2543054,
+                "_cluster_id": 8
+            },
+            {
+                "S₀ (mS)": 9.390683,
+                "ε₁₀﹪ (%)": 250.91527,
+                "Uncertainty": 0.254755985,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 16.110619,
+                "ε₁₀﹪ (%)": 346.54578,
+                "Uncertainty": 0.255005765,
+                "_cluster_id": 0
+            },
+            {
+                "S₀ (mS)": 4.9224977,
+                "ε₁₀﹪ (%)": 353.03973,
+                "Uncertainty": 0.25719136,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 5.5497484,
+                "ε₁₀﹪ (%)": 195.62662,
+                "Uncertainty": 0.26364985,
+                "_cluster_id": 5
+            },
+            {
+                "S₀ (mS)": 15.417961,
+                "ε₁₀﹪ (%)": 390.02298,
+                "Uncertainty": 0.26426741,
+                "_cluster_id": 1
+            },
+            {
+                "S₀ (mS)": 4.8802667,
+                "ε₁₀﹪ (%)": 339.14075,
+                "Uncertainty": 0.264478205,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 16.07054,
+                "ε₁₀﹪ (%)": 347.51935,
+                "Uncertainty": 0.26449968,
+                "_cluster_id": 0
+            },
+            {
+                "S₀ (mS)": 4.066219,
+                "ε₁₀﹪ (%)": 162.42586,
+                "Uncertainty": 0.264685585,
+                "_cluster_id": 2
+            },
+            {
+                "S₀ (mS)": 4.5693283,
+                "ε₁₀﹪ (%)": 348.2216,
+                "Uncertainty": 0.267343835,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 5.9746413,
+                "ε₁₀﹪ (%)": 520.6314,
+                "Uncertainty": 0.270782755,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 6.6400685,
+                "ε₁₀﹪ (%)": 162.679,
+                "Uncertainty": 0.27114071,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 8.481796,
+                "ε₁₀﹪ (%)": 439.6483,
+                "Uncertainty": 0.272556005,
+                "_cluster_id": 6
+            },
+            {
+                "S₀ (mS)": 8.197974,
+                "ε₁₀﹪ (%)": 601.85516,
+                "Uncertainty": 0.27300854,
+                "_cluster_id": 0
+            },
+            {
+                "S₀ (mS)": 22.850677,
+                "ε₁₀﹪ (%)": 131.37596,
+                "Uncertainty": 0.273616415,
+                "_cluster_id": 2
+            },
+            {
+                "S₀ (mS)": 5.952762,
+                "ε₁₀﹪ (%)": 525.56854,
+                "Uncertainty": 0.27475681,
+                "_cluster_id": 1
+            },
+            {
+                "S₀ (mS)": 22.940107,
+                "ε₁₀﹪ (%)": 122.91219,
+                "Uncertainty": 0.27657126,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 8.86908,
+                "ε₁₀﹪ (%)": 50.0849,
+                "Uncertainty": 0.278010535,
+                "_cluster_id": 2
+            },
+            {
+                "S₀ (mS)": 5.473463,
+                "ε₁₀﹪ (%)": 396.75494,
+                "Uncertainty": 0.27839961,
+                "_cluster_id": 9
+            },
+            {
+                "S₀ (mS)": 4.4606743,
+                "ε₁₀﹪ (%)": 378.3081,
+                "Uncertainty": 0.27929977,
+                "_cluster_id": 5
+            },
+            {
+                "S₀ (mS)": 4.5178723,
+                "ε₁₀﹪ (%)": 358.1199,
+                "Uncertainty": 0.281735425,
+                "_cluster_id": 7
+            },
+            {
+                "S₀ (mS)": 4.659781,
+                "ε₁₀﹪ (%)": 343.0999,
+                "Uncertainty": 0.281743425,
+                "_cluster_id": 8
+            },
+            {
+                "S₀ (mS)": 17.183704,
+                "ε₁₀﹪ (%)": 44.378822,
+                "Uncertainty": 0.287488725,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 8.202655,
+                "ε₁₀﹪ (%)": 608.51697,
+                "Uncertainty": 0.292404488,
+                "_cluster_id": 3
+            },
+            {
+                "S₀ (mS)": 5.9510727,
+                "ε₁₀﹪ (%)": 62.82067,
+                "Uncertainty": 0.292998585,
+                "_cluster_id": 1
+            },
+            {
+                "S₀ (mS)": 2.7129107,
+                "ε₁₀﹪ (%)": 364.89133,
+                "Uncertainty": 0.295191265,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 6.6909976,
+                "ε₁₀﹪ (%)": 500.8411,
+                "Uncertainty": 0.299132705,
+                "_cluster_id": 2
+            },
+            {
+                "S₀ (mS)": 9.37975,
+                "ε₁₀﹪ (%)": 255.65193,
+                "Uncertainty": 0.299437125,
+                "_cluster_id": 4
+            },
+            {
+                "S₀ (mS)": 5.481704,
+                "ε₁₀﹪ (%)": 189.29866,
+                "Uncertainty": 0.29993444,
+                "_cluster_id": 1
+            }
+        ],
+        "clusters": [
+            {
+                "id": 41947,
+                "inputs": {
+                    "materials": {
+                        "MXene": 56.0,
+                        "SWNT": 40.0,
+                        "AuNP": -0.0,
+                        "PVA": 4.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "2D1D",
+                        "Applied Pre-Strain": 100,
+                        "Thickness": 800
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 9.044407,
+                    "ε₁₀﹪ (%)": 222.42284,
+                    "Prediction Uncertainty (%)": 3.723716
+                },
+                "cluster_id": 7
+            },
+            {
+                "id": 140014,
+                "inputs": {
+                    "materials": {
+                        "MXene": 46.0,
+                        "SWNT": 40.0,
+                        "AuNP": 10.0,
+                        "PVA": 4.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "2D2D",
+                        "Applied Pre-Strain": 300,
+                        "Thickness": 1200
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 13.388642,
+                    "ε₁₀﹪ (%)": 330.3292,
+                    "Prediction Uncertainty (%)": 4.7151275
+                },
+                "cluster_id": 4
+            },
+            {
+                "id": 119626,
+                "inputs": {
+                    "materials": {
+                        "MXene": 20.0,
+                        "SWNT": 80.0,
+                        "AuNP": -0.0,
+                        "PVA": 0.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "2D2D",
+                        "Applied Pre-Strain": 200,
+                        "Thickness": 1200
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 20.171295,
+                    "ε₁₀﹪ (%)": 363.54156,
+                    "Prediction Uncertainty (%)": 4.8493736
+                },
+                "cluster_id": 6
+            },
+            {
+                "id": 143496,
+                "inputs": {
+                    "materials": {
+                        "MXene": 12.0,
+                        "SWNT": 70.0,
+                        "AuNP": 14.0,
+                        "PVA": 4.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "2D2D",
+                        "Applied Pre-Strain": 300,
+                        "Thickness": 1600
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 7.787079,
+                    "ε₁₀﹪ (%)": 569.00995,
+                    "Prediction Uncertainty (%)": 5.2058101
+                },
+                "cluster_id": 6
+            },
+            {
+                "id": 124674,
+                "inputs": {
+                    "materials": {
+                        "MXene": 10.0,
+                        "SWNT": 32.0,
+                        "AuNP": 50.0,
+                        "PVA": 8.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "2D2D",
+                        "Applied Pre-Strain": 200,
+                        "Thickness": 1600
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 4.6383286,
+                    "ε₁₀﹪ (%)": 369.08997,
+                    "Prediction Uncertainty (%)": 7.849665
+                },
+                "cluster_id": 4
+            },
+            {
+                "id": 37013,
+                "inputs": {
+                    "materials": {
+                        "MXene": 100.0,
+                        "SWNT": 0.0,
+                        "AuNP": 0.0,
+                        "PVA": 0.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "2D",
+                        "Applied Pre-Strain": 0,
+                        "Thickness": 1600
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 128.25856,
+                    "ε₁₀﹪ (%)": 33.213894,
+                    "Prediction Uncertainty (%)": 11.2313887
+                },
+                "cluster_id": 3
+            },
+            {
+                "id": 103291,
+                "inputs": {
+                    "materials": {
+                        "MXene": 50.0,
+                        "SWNT": 50.0,
+                        "AuNP": 0.0,
+                        "PVA": 0.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "2D2D",
+                        "Applied Pre-Strain": 100,
+                        "Thickness": 1200
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 31.230593,
+                    "ε₁₀﹪ (%)": 200.16895,
+                    "Prediction Uncertainty (%)": 12.2385618
+                },
+                "cluster_id": 1
+            },
+            {
+                "id": 17651,
+                "inputs": {
+                    "materials": {
+                        "MXene": 64.0,
+                        "SWNT": 26.0,
+                        "AuNP": 8.0,
+                        "PVA": 2.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "1D",
+                        "Applied Pre-Strain": 0,
+                        "Thickness": 1600
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 22.91,
+                    "ε₁₀﹪ (%)": 128.51642,
+                    "Prediction Uncertainty (%)": 13.129938899999999
+                },
+                "cluster_id": 1
+            },
+            {
+                "id": 94371,
+                "inputs": {
+                    "materials": {
+                        "MXene": 14.0,
+                        "SWNT": 78.0,
+                        "AuNP": 2.0,
+                        "PVA": 6.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "2D2D",
+                        "Applied Pre-Strain": 100,
+                        "Thickness": 800
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 8.491879,
+                    "ε₁₀﹪ (%)": 222.91624,
+                    "Prediction Uncertainty (%)": 13.9405525
+                },
+                "cluster_id": 1
+            },
+            {
+                "id": 6917,
+                "inputs": {
+                    "materials": {
+                        "MXene": 4.0,
+                        "SWNT": 88.0,
+                        "AuNP": 6.0,
+                        "PVA": 2.0
+                    },
+                    "parameters": {
+                        "Deformation Sequence": "1D",
+                        "Applied Pre-Strain": 0,
+                        "Thickness": 1200
+                    }
+                },
+                "predictions": {
+                    "S₀ (mS)": 16.213448,
+                    "ε₁₀﹪ (%)": 84.08989,
+                    "Prediction Uncertainty (%)": 14.1259978
+                },
+                "cluster_id": 7
+            }
+        ]
+    },
+    "meta": {
+        "project_id": "p5",
+        "model_id": "v1124",
+        "total_count": 88,
+        "returned_count": 88,
+        "total_cluster_count": 10,
+        "returned_cluster_count": 88,
+        "clustering_enabled": true,
+        "processing_time_ms": 0,
+        "database_time_ms": 0
+    }
+}

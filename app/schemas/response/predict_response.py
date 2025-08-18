@@ -9,7 +9,7 @@ from app.schemas.request.predict_payload import PredictInputItem
 class PredictionItem(BaseModel):
     id: int
     inputs: List[PredictInputItem] 
-    predictions: Dict[str, Union[float, int, bool, None]]
+    predictions: Dict[str, Union[float, int, bool, str, None]]
 
 
 

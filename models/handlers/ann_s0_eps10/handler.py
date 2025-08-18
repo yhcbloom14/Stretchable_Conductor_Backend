@@ -99,9 +99,9 @@ class AnnS0Eps10Handler(BaseModelHandler):
             logger.info(f"Material combination is not feasible.")
             return {
                 "Feasibility": False,
-                "S₀ (mS)": None,
-                "ε₁₀﹪ (%)": None,
-                "Prediction Uncertainty (%)": None
+                "S₀ (mS)": "N/A",
+                "ε₁₀﹪ (%)": "N/A",
+                "Prediction Uncertainty (%)": "N/A"
             }
 
         self._load_prediction_models()
@@ -120,6 +120,14 @@ class AnnS0Eps10Handler(BaseModelHandler):
         # uncertainty
         uncertainty = np.mean([eps10_covar, s0_covar]) * 100
         logger.info(f"uncertainty (%): {uncertainty}")
+
+        if uncertainty > 30:
+            return {
+                "Feasibility": True,
+                "S₀ (mS)": "N/A",
+                "ε₁₀﹪ (%)": "N/A",
+                "Prediction Uncertainty (%)": ">30%"
+            }
 
         return {
             "Feasibility": True,

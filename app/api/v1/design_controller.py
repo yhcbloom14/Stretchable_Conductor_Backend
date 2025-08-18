@@ -57,15 +57,15 @@ def query_samples(payload: DesignPayload):
             "id": idx,
             "inputs": {
                 "materials": {
-                    "MXene": row["MXene"],
-                    "SWNT": row["SWNT"],
-                    "AuNP": row["AuNP"],
-                    "PVA": row["PVA"],
+                    "MXene (wt.%)": row["MXene"],
+                    "SWNT (wt.%)": row["SWNT"],
+                    "AuNP (wt.%)": row["AuNP"],
+                    "PVA (wt.%)": row["PVA"],
                 },
                 "parameters": {
                     "Deformation Sequence": morphology,
-                    "Applied Pre-Strain": f"{int(row['Applied Pre-Strain']):,}",
-                    "Thickness": f"{int(row['Thickness']):,}"
+                    "Applied Pre-Strain (%)": f"{int(row['Applied Pre-Strain']):,}",
+                    "Thickness (nm)": f"{int(row['Thickness']):,}"
                 }
             },
             "predictions": {

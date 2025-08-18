@@ -58,10 +58,10 @@ class AnnS0Eps10Handler(BaseModelHandler):
 
     def _convert_input_to_df(self, input_item: PredictInputItem) -> pd.DataFrame:
         material_rename_map = {
-            "SWNT": "CNT",
-            "AuNP": "GNP",
-            "MXene": "MXN",
-            "PVA": "PVA",
+            "SWNT (wt.%)": "CNT",
+            "AuNP (wt.%)": "GNP",
+            "MXene (wt.%)": "MXN",
+            "PVA (wt.%)": "PVA",
         }
         materials_percent = {
             material_rename_map.get(k, k): float(v) / 100 for k, v in input_item[0].materials.items()
@@ -76,8 +76,8 @@ class AnnS0Eps10Handler(BaseModelHandler):
         }
         deformation_features = deformation_translate.get(deformation, {"1D": 0, "2D": 0, "2D1D": 0, "2D2D": 0})
 
-        pre_strain = input_item[0].parameters.get("Applied Pre-Strain", "").replace(",", "")
-        thickness = input_item[0].parameters.get("Thickness", "").replace(",", "")
+        pre_strain = input_item[0].parameters.get("Applied Pre-Strain (%)", "").replace(",", "")
+        thickness = input_item[0].parameters.get("Thickness (nm)", "").replace(",", "")
 
         features = {
             **materials_percent,

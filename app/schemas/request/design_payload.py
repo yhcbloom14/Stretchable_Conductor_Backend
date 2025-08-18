@@ -16,8 +16,8 @@ class MaterialFilter(BaseModel):
 
 class ParameterFilter(BaseModel):
     deformation_sequence: Dict[str, List[str]] = Field(..., alias="Deformation Sequence")
-    pre_strain: Dict[str, List[str]] = Field(..., alias="Applied Pre-Strain")
-    thickness: Dict[str, List[str]] = Field(..., alias="Thickness")
+    pre_strain: Dict[str, List[str]] = Field(..., alias="Applied Pre-Strain (%)")
+    thickness: Dict[str, List[str]] = Field(..., alias="Thickness (nm)")
 
 
 class TargetFilter(BaseModel):

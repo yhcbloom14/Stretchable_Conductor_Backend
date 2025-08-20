@@ -7,7 +7,7 @@ set ENV_NAME=sc_al
 REM Check if the environment exists
 conda info --envs | findstr /i "%ENV_NAME%" > nul
 if errorlevel 1 (
-    echo Environment %ENV_NAME% not found. Creating from models/handlers/ann_s0_eps10_config/environment.yml...
+    echo Environment %ENV_NAME% not found. Creating from sc_al_env.yml...
     conda env create -f environment.yml
 )
 

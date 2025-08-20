@@ -25,8 +25,7 @@ This project is a backend service built with FastAPI to support material propert
 │       ├── ann_s0_eps10/ # Model
 │           ├── data/     # model pickle and csv files
 │           └── utils/    # model utils scripts
-├── environment.yml       # Conda environment definition
-├── requirements.txt      # Optional: pip-based dependencies
+├── sc_al_env.yml         # Conda environment definition
 ├── start_server.bat      # Windows script to launch the server
 └── README.md             # Project introduction
 ```
@@ -59,3 +58,4 @@ start_server.bat
 
 - Make sure to activate the environment before running the server.
 - Logs and labels include Unicode characters (e.g. subscript), so UTF-8 support is recommended.
+- The frontend request and response data format samples are provided in the `doc/samples` directory.

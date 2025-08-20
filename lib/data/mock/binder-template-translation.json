@@ -1,0 +1,15 @@
+{
+    "P-1 桶槽大小": "P-1 Tank Size",
+    "P-2 溶劑": "P-2 Solvent Type",
+    "P-3 滴定模式": "P-3 Titration Mode",
+    "P-4 溫度": "P-4 Temperature",
+    "P-5 起始劑": "P-5 Initiator Type",
+    "P-6 起始劑濃度": "P-6 Initiator",
+    "P-7 總單體濃度": "P-7 Monomer",
+    "R-3 乾膜產品": "R-3 Product Type",
+    "R-1 Mw": "R-1 MW",
+    "R-2 pd": "R-2 PDI",
+    "R-4 Mw/std Mw": "R-4 MW/std of MW",
+    "R-5 pd/std pd": "R-5 PDI/std of PDI",
+    "Uncertainty": "Model Uncertainty"
+}

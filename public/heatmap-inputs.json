@@ -1,0 +1,111 @@
+{
+    "formulation": [
+        {
+            "type": "numerical",
+            "label": "M-1",
+            "std": 0
+        },
+        {
+            "type": "numerical",
+            "label": "M-2",
+            "std": 18.421
+        },
+        {
+            "type": "numerical",
+            "label": "M-3",
+            "std": 24.035
+        },
+        {
+            "type": "numerical",
+            "label": "M-4",
+            "std": 0
+        },
+        {
+            "type": "numerical",
+            "label": "M-5",
+            "std": 0
+        },
+        {
+            "type": "numerical",
+            "label": "M-6",
+            "std": 0
+        },
+        {
+            "type": "numerical",
+            "label": "M-7",
+            "std": 57.544
+        },
+        {
+            "type": "numerical",
+            "label": "M-8",
+            "std": 0
+        },
+        {
+            "type": "numerical",
+            "label": "M-9",
+            "std": 0
+        },
+        {
+            "type": "numerical",
+            "label": "M-10",
+            "std": 0
+        },
+        {
+            "type": "numerical",
+            "label": "M-11",
+            "std": 0
+        },
+        {
+            "type": "numerical",
+            "label": "M-12",
+            "std": 0
+        }
+    ],
+    "process": [
+        {
+            "type": "categorical",
+            "label": "P-1",
+            "value": "S",
+            "options": ["S", "L"]
+        },
+        {
+            "type": "categorical",
+            "label": "P-2",
+            "value": "A",
+            "options": ["A", "B"]
+        },
+        {
+            "type": "categorical",
+            "label": "P-3",
+            "value": "C",
+            "options": ["C", "E", "P"]
+        },
+        {
+            "type": "numerical",
+            "label": "P-4",
+            "std": 80
+        },
+        {
+            "type": "categorical",
+            "label": "P-5",
+            "value": "I",
+            "options": ["I", "T"]
+        },
+        {
+            "type": "numerical",
+            "label": "P-6",
+            "std": 0.08
+        },
+        {
+            "type": "numerical",
+            "label": "P-7",
+            "std": 39.45
+        },
+        {
+            "type": "categorical",
+            "label": "R-3",
+            "value": "AP",
+            "options": ["AP", "D1", "D2"]
+        }
+    ]
+}

@@ -1,0 +1,192 @@
+{
+    "id": "binder-template",
+    "name": "Binder Template",
+    "Formulation": [
+        {
+            "type": "num",
+            "featureKey": "M-1",
+            "label": "M-1 MAA",
+            "min": 0,
+            "max": 30,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-2",
+            "label": "M-2 AA",
+            "min": 0,
+            "max": 21,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-3",
+            "label": "M-3 MMA",
+            "min": 0,
+            "max": 82.2,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-4",
+            "label": "M-4 SM",
+            "min": 0,
+            "max": 80,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-5",
+            "label": "M-5 BzMA",
+            "min": 0,
+            "max": 80,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-6",
+            "label": "M-6 BA",
+            "min": 0,
+            "max": 29,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-7",
+            "label": "M-7 BMA",
+            "min": 0,
+            "max": 49.2,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-8",
+            "label": "M-8 EA",
+            "min": 0,
+            "max": 35,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-9",
+            "label": "M-9 2-EHA",
+            "min": 0,
+            "max": 35,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-10",
+            "label": "M-10 AAEM",
+            "min": 0,
+            "max": 22.5,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "M-11",
+            "label": "M-11 HEMA",
+            "min": 0,
+            "max": 25,
+            "std": 0.1
+        }
+    ],
+    "Process": [
+        {
+           "type": "cat",
+           "featureKey": "P-1",
+           "label": "P-1 桶槽大小",
+           "options": ["S", "L"] 
+        },
+        {
+            "type": "cat",
+            "featureKey": "P-2",
+            "label": "P-2 溶劑",
+            "options": ["A", "M"] 
+        },
+        {
+            "type": "cat",
+            "featureKey": "P-3",
+            "label": "P-3 滴定模式",
+            "options": ["C", "E", "P"] 
+        },
+        {
+            "type": "num",
+            "featureKey": "P-4",
+            "label": "P-4 溫度",
+            "min": 80,
+            "max": 110,
+            "std": 0.1
+        },
+        {
+            "type": "cat",
+            "featureKey": "P-5",
+            "label": "P-5 起始劑",
+            "options": ["I", "T"] 
+        },
+        {
+            "type": "num",
+            "featureKey": "P-6",
+            "label": "P-6 起始劑濃度",
+            "min": 0.09,
+            "max": 1.68,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "P-7",
+            "label": "P-7 總單體濃度",
+            "min": 39.45,
+            "max": 58.79,
+            "std": 0.01
+        },
+        {
+            "type": "cat",
+            "featureKey": "R-3",
+            "label": "R-3 乾膜產品",
+            "options": ["AP", "D1", "D2"] 
+        }
+    ],
+    "Output": [
+        {
+            "type": "num",
+            "featureKey": "R-1",
+            "label": "R-1 Mw",
+            "min": 35312,
+            "max": 111890,
+            "std": 1
+        },
+        {
+            "type": "num",
+            "featureKey": "R-2",
+            "label": "R-2 pd",
+            "min": 1.5,
+            "max": 3.56,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "R-4",
+            "label": "R-4 Mw/std Mw",
+            "min": 0.75,
+            "max": 2.41,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "R-5",
+            "label": "R-5 pd/std pd",
+            "min": 1.03,
+            "max": 1.84,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "Uncertainty",
+            "label": "Uncertainty",
+            "min": 0,
+            "max": 100,
+            "std": 0.1
+        }
+    ] 
+}

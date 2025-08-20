@@ -1,0 +1,102 @@
+{
+    "Formulation": [
+        {
+            "type": "num",
+            "featureKey": "MMT",
+            "label": "MMT",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "CNF",
+            "label": "CNF",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "Gelatin",
+            "label": "Gelatin",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "Glycerol",
+            "label": "Glycerol",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        }
+    ],
+    "Output": [
+        {
+            "type": "num",
+            "featureKey": "TransVis",
+            "label": "Optical Transmittance",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "TransIR",
+            "label": "Infrared Transmittance",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "TransUV",
+            "label": "Ultraviolet Transmittance",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "TensileStrength",
+            "label": "Tensile Strength",
+            "min": 0,
+            "max": 99,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "TensileStrain",
+            "label": "Tensile Strain",
+            "min": 0,
+            "max": 0.1,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "TensileModulus",
+            "label": "Tensile Modulus",
+            "min": 0,
+            "max": 10000,
+            "std": 1
+        },
+        {
+            "type": "num",
+            "featureKey": "TensileCurveAlpha",
+            "label": "Tensile Curve Alpha",
+            "min": 0,
+            "max": 1,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "TensileCurveBeta",
+            "label": "Tensile Curve Beta",
+            "min": 0,
+            "max": 1,
+            "std": 0.01
+        }
+    ]
+}

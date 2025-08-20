@@ -1,0 +1,44 @@
+{
+    "Formulation": [
+        {
+            "type": "num",
+            "featureKey": "MMT",
+            "label": "MMT",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "CNF",
+            "label": "CNF",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "Gelatin",
+            "label": "Gelatin",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+            "featureKey": "Glycerol",
+            "label": "Glycerol",
+            "min": 0,
+            "max": 100,
+            "std": 0.01
+        }
+    ],
+    "Output": [
+        {
+            "type": "cat",
+            "featureKey": "Grade",
+            "label": "Grade",
+            "options": ["A", "B", "C", "D"]
+        }
+    ]
+}

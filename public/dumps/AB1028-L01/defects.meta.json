@@ -1,0 +1,273 @@
+{
+  "processing_info": {
+    "start_time": "2025-06-11T14:47:50.582487",
+    "end_time": "2025-06-11T14:50:49.461505",
+    "duration_seconds": 178.8790180683136,
+    "batch_directory": "/Users/tianle/Documents/UMD/Projects/aM_dist/proj_06/notebooks/../defect-viewer/dumps/SD1015-L062RT08",
+    "csv_file": "26112.csv"
+  },
+  "batch_info": {
+    "batchNo": "L01",
+    "length": "5031",
+    "inspectionStartTime": "2024/08/18 04:32:20",
+    "inspectionEndTime": "2024/08/18 06:38:21",
+    "individualNo": null,
+    "orderNo": null,
+    "notes": null
+  },
+  "model_info": {
+    "model_name": "tianlec/Bowery-ViT",
+    "sha": "13dc56c322e8c4a75c589310848148fa3c1509b5",
+    "last_modified": "2025-06-06T02:42:19.000Z",
+    "pipeline_tag": "unknown",
+    "library_name": "unknown"
+  },
+  "processing_parameters": {
+    "batch_size": 32,
+    "top_p": 0.6,
+    "min_p": 0.1
+  },
+  "counts": {
+    "total_csv_rows": 4315,
+    "processed_successfully": 4292,
+    "ignored_invalid_rows": 23,
+    "error_images": 0
+  },
+  "ignored_rows": [
+    {
+      "csv_row_index": 0,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": null,
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 1,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": null,
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 2608,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機4",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 2609,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機1",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 2610,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機2",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 2611,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機3",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3055,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機4",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3056,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機1",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3057,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機2",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3058,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機3",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3466,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機4",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3467,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機1",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3468,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機2",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3469,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機3",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3822,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機4",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3823,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機1",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 3824,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機3",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 4020,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機4",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 4021,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機3",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 4215,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機4",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 4216,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機3",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 4306,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": "攝影機4",
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    },
+    {
+      "csv_row_index": 4314,
+      "original_path": null,
+      "reason": "Invalid or missing image path",
+      "缺陷名稱": null,
+      "組": null,
+      "等級": null,
+      "判定回路": null
+    }
+  ],
+  "error_images": [],
+  "environment": {
+    "system": {
+      "os": "Darwin",
+      "os_version": "Darwin Kernel Version 24.5.0: Tue Apr 22 19:54:25 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T6020",
+      "platform": "macOS-15.5-arm64-arm-64bit-Mach-O",
+      "architecture": [
+        "64bit",
+        "Mach-O"
+      ],
+      "processor": "arm",
+      "python_version": "3.13.2 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 12:55:35) [Clang 14.0.6 ]"
+    },
+    "libraries": {
+      "torch": "2.6.0",
+      "transformers": "4.51.3",
+      "PIL": "11.2.1",
+      "pandas": "2.2.3",
+      "numpy": "2.2.4"
+    },
+    "device": {
+      "cuda_available": false,
+      "cuda_device_count": 0,
+      "mps_available": true,
+      "selected_device": "MPS GPU",
+      "mps_built": true
+    }
+  }
+}

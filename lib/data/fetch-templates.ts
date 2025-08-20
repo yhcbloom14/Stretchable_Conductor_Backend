@@ -6,6 +6,13 @@ import { fetchProfile } from "./fetch-profile";
 import path from "path"
 import { promises as fs } from "fs"
 
+function getBaseUrl() {
+  if (typeof window !== 'undefined') {
+    return ''; 
+  }
+  return process.env.NEXT_PUBLIC_DEPLOY_URL || 'http://localhost:3000';
+}
+
 export async function fetchTemplates(): Promise<Template[]> {
   const templates: Template[] = [];
 
@@ -23,8 +30,7 @@ export async function fetchTemplates(): Promise<Template[]> {
   for (const tmpl of templateFiles) {
     try {
       // Use NEXT_PUBLIC_DEPLOY_URL to form absolute URL
-      const baseUrl =
-        process.env.NEXT_PUBLIC_DEPLOY_URL || "http://localhost:3000";
+      const baseUrl = getBaseUrl();
 
       const res = await fetch(`${baseUrl}/${tmpl.file}`);
       if (!res.ok) {

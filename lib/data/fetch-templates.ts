@@ -10,7 +10,7 @@ function getBaseUrl() {
   if (typeof window !== 'undefined') {
     return ''; 
   }
-  return process.env.NEXT_PUBLIC_DEPLOY_URL || 'http://localhost:3000';
+  return process.env.NEXT_PUBLIC_DEPLOY_URL;
 }
 
 export async function fetchTemplates(): Promise<Template[]> {

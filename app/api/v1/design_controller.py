@@ -71,7 +71,7 @@ def query_samples(payload: DesignPayload):
             "predictions": {
                 "S₀ (mS)": float(row["S0_mean"]),
                 "ε₁₀﹪ (%)": float(row["eps10_mean"]),
-                "Prediction Uncertainty (%)": float(row["uncertainty"]) * 100,
+                "Prediction Uncertainty (%)": float(row["uncertainty"]),
             },
             "cluster_id": idx % 10
         }

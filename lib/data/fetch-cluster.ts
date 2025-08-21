@@ -7,11 +7,11 @@ export const fetchCluster = async (inputs: any, templateId?: string): Promise<an
         let projectId = "p5"  // Default for Property Template
         let modelId = "v1124" // Default for Property Template
         
-        if (templateId === STRETCHABLE_ELECTRODE_TEMPLATE_ID) {
-            // Property template configuration
-            projectId = "property-template"  // Placeholder - needs actual project ID
-            modelId = "property-template-v1" // Placeholder - needs actual model ID
-        }
+        // if (templateId === STRETCHABLE_ELECTRODE_TEMPLATE_ID) {
+        //     // Property template configuration
+        //     projectId = "property-template"  // Placeholder - needs actual project ID
+        //     modelId = "property-template-v1" // Placeholder - needs actual model ID
+        // }
         
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/query/samples`, {
             project_id: projectId,

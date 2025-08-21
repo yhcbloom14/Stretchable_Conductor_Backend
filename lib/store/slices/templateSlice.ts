@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit"
 import { TEMPLATE_SLICE_NAME } from "@/lib/constants";
 import { Template } from "@/lib/types/Template";
 import { fetchTemplates } from "@/lib/data/fetch-templates";
-// Translation logic removed - property template uses English labels
+import binderTemplateTranslationJson from "@/lib/data/mock/binder-template-translation.json";
+
+const binderTemplateTranslation: { [key: string]: string } = binderTemplateTranslationJson;
 
 interface TemplateState {
     templates: Template[]
@@ -87,12 +89,18 @@ export const selectMaterials = createSelector(
 
 export const selectProcess = createSelector(
     [selectActiveTemplate],
-    (activeTemplate) => activeTemplate?.Process || []
+    (activeTemplate) => activeTemplate?.Process?.map(process => ({
+        ...process,
+        label: binderTemplateTranslation[process.label] || process.label
+    })) || []
 );
 
 export const selectOutputs = createSelector(
     [selectActiveTemplate],
-    (activeTemplate) => activeTemplate?.Output || []
+    (activeTemplate) => activeTemplate?.Output?.map(output => ({
+        ...output,
+        label: binderTemplateTranslation[output.label] || output.label
+    })) || []
 );
 
 export const selectTemplateLoading = createSelector(

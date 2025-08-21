@@ -19,6 +19,29 @@ function ProcessInput({ isSelectable = true, title = "" }: { isSelectable?: bool
     const process = useAppSelector(selectProcess)
     const [segments, setSegments] = useState<SegmentType[]>([])
 
+    // Get the current Deformation Sequence value to determine Applied Pre-Strain options
+    const getDeformationSequenceValue = () => {
+        return searchParams.get("Deformation Sequence") || "G₁–1D"
+    }
+
+    // Filter Applied Pre-Strain options based on Deformation Sequence
+    const getFilteredPreStrainOptions = (segment: ProcessSegment) => {
+        if (segment.featureKey === "Applied Pre-Strain (%)") {
+            const deformationValue = getDeformationSequenceValue()
+            console.log(`Filtering Applied Pre-Strain options. Deformation: ${deformationValue}`)
+            if (deformationValue === "G₁–1D" || deformationValue === "G₁–2D") {
+                // Only allow 0 for G1 options
+                const filtered = segment.options.filter(option => option === "0")
+                console.log(`G1 deformation selected, filtered options:`, filtered)
+                return filtered
+            } else {
+                // Allow all options for G2 options
+                console.log(`G2 deformation selected, all options:`, segment.options)
+                return segment.options
+            }
+        }
+        return segment.options
+    }
 
     // Memoize the updateValue callback
     const updateValue = useCallback((featureKey: string, isSelected: boolean, value: number | string) => {
@@ -44,6 +67,23 @@ function ProcessInput({ isSelectable = true, title = "" }: { isSelectable?: bool
         })
         setSegments(params)
     }, [searchParams, process])
+
+    // Watch for Deformation Sequence changes and update Applied Pre-Strain accordingly
+    useEffect(() => {
+        const deformationValue = getDeformationSequenceValue()
+        console.log(`Deformation Sequence changed to: ${deformationValue}`)
+        if (deformationValue === "G₁–1D" || deformationValue === "G₁–2D") {
+            // Force Applied Pre-Strain to 0 for G1 options
+            const currentPreStrain = searchParams.get("Applied Pre-Strain (%)")
+            console.log(`G1 deformation detected, current Pre-Strain: ${currentPreStrain}`)
+            if (currentPreStrain !== "0") {
+                console.log(`Forcing Applied Pre-Strain to 0`)
+                const urlParams = new URLSearchParams(searchParams)
+                urlParams.set("Applied Pre-Strain (%)", "0")
+                router.replace(`?${urlParams.toString()}`, { scroll: false })
+            }
+        }
+    }, [searchParams, router])
 
     // Optimize URL parameter updates with debouncing
     const updateUrlParams = useDebouncedCallback((segments: ProcessSegment[]) => {
@@ -71,6 +111,20 @@ function ProcessInput({ isSelectable = true, title = "" }: { isSelectable?: bool
     
     const Segment = ({ segment }: { segment: SegmentType }) => {
         const isSelected = searchParams.get(`${segment.featureKey}_include`) === "true"
+        
+        // Get filtered options for this segment
+        const filteredOptions = getFilteredPreStrainOptions(segment)
+        
+        // If this is Applied Pre-Strain and the current value is not in filtered options, reset to first available option
+        const getValidValue = () => {
+            if (segment.featureKey === "Applied Pre-Strain (%)") {
+                if (!filteredOptions.includes(segment.value as string)) {
+                    return filteredOptions[0]
+                }
+            }
+            return segment.value
+        }
+        
         return (
             <div className="w-full flex flex-col">
                 {
@@ -89,8 +143,8 @@ function ProcessInput({ isSelectable = true, title = "" }: { isSelectable?: bool
                         <CategoricalInput
                             label={segment.label}
                             name={`${segment.featureKey}`}
-                            options={segment.options.map((option: any )=> ({value: option, label: option}))}
-                            value={segment.value as string}
+                            options={filteredOptions.map((option: any )=> ({value: option, label: option}))}
+                            value={getValidValue() as string}
                             onChange={updateValue.bind(null, segment.featureKey, segment.isSelected)}
                             disabled={isSelected}
                         />

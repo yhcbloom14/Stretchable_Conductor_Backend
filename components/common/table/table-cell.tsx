@@ -12,7 +12,7 @@ import { updateRole } from "@/lib/actions/update-role";
 import { profileSlice } from "@/lib/store/slices/profileSlice";
 import { refreshOrg } from "@/lib/store/slices/orgSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import binderTranslations from "@/lib/data/mock/binder-template-translation.json";
+// Translation logic removed - property template uses English labels
 
 export default function TableCell({column, data}: {column: Column, data: Record<string, any>}) {
     switch (column.type) {
@@ -95,17 +95,8 @@ function EmailCell({data}: {data: Record<string, any>}) {
 }
 
 function DataCell({data, label, column}: {data: Record<string, any>, label: string, column: Column}) {
-    // For Binder Template, check if we need to use the original (untranslated) label to access data
-    const dataKey = (() => {
-        // Check if this is a translated label by doing a reverse lookup
-        const originalKey = Object.keys(binderTranslations).find(
-            key => binderTranslations[key as keyof typeof binderTranslations] === label
-        );
-        // If we found a match, it means this label was translated, so use the original key
-        return originalKey || label;
-    })();
-    
-    return <div className="text-center md:text-left">{data[dataKey]}</div>
+    // Property template uses English labels, so we can use the label directly
+    return <div className="text-center md:text-left">{data[label]}</div>
 }
 
 function OrganizationCell({data}: {data: Record<string, any>}) {

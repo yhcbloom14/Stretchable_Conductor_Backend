@@ -9,7 +9,9 @@ export const TEMPLATE_SLICE_NAME = "templates"
 
 export const NULL_ORG = 'null-organization'
 
-export const BINDER_TEMPLATE_ID = '82676d1e-075f-45f6-bb52-1c2f172d5458'
+// Template IDs - these should be unique for each template
+export const PROPERTY_TEMPLATE_ID = '82676d1e-075f-45f6-bb52-1c2f172d5458'
+export const STRETCHABLE_ELECTRODE_TEMPLATE_ID = '82676d1e-075f-45f6-bb52-1c2f172d5458'
 
 // Feature Flags
 const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'

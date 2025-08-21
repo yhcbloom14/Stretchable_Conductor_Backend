@@ -18,7 +18,7 @@ import HeatmapLazy from "@/components/heatmap-lazy"
 import { downloadCSV } from "@/components/utils/parse-csv"
 import CollapsibleWrapper from "@/components/common/collapsible-wrapper"
 import { SkeletonList, SkeletonChart } from "@/components/common/skeleton"
-import { BINDER_TEMPLATE_ID, isFeatureEnabled, getFeatureDisabledReason } from "@/lib/constants"
+import { PROPERTY_TEMPLATE_ID, isFeatureEnabled, getFeatureDisabledReason } from "@/lib/constants"
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip"
 
 const materialOptions = [
@@ -263,7 +263,7 @@ export default function InverseDesignPage() {
             },
             prediction_targets: outputDisplay
         }
-        fetchCluster(payload)
+        fetchCluster(payload, activeTemplateId)
             .then((data) => {
                 console.log('Fetched sample:', data)
                 generatePlotData(data)
@@ -283,7 +283,7 @@ export default function InverseDesignPage() {
         }
         downloadCSV(csvData, 'inverse_design_sample.csv')
     }
-    const isDisabled = (!materials.length && !parameters.length && !outputs.length) || activeTemplateId !== BINDER_TEMPLATE_ID
+    const isDisabled = (!materials.length && !parameters.length && !outputs.length) || activeTemplateId !== PROPERTY_TEMPLATE_ID
     const isTableDataAvailable = tableRows.length > 0 && tableColumns.length > 0
     const expandedRowRender = (record: any) => (
         <Table

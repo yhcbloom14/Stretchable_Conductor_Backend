@@ -14,7 +14,7 @@ import { Column, ColumnEnum } from "@/lib/types/Column"
 import { fetchPredictions } from "@/lib/data/fetch-predictions"
 import { Alert, Table, Popconfirm } from 'antd';
 import type { TableColumnsType } from 'antd';
-import { BINDER_TEMPLATE_ID } from "@/lib/constants"
+import { PROPERTY_TEMPLATE_ID } from "@/lib/constants"
 
 export default function DirectPredictionPage() {
     const dispatch = useAppDispatch()
@@ -227,7 +227,7 @@ export default function DirectPredictionPage() {
         })
 
         if (activeTemplate?.id) {
-            fetchPredictions(payload)
+            fetchPredictions(payload, activeTemplate.id)
                 // TODO: fix data type
                 .then((data: any) => {
                     console.log('Fetched prediction:', data)
@@ -302,7 +302,7 @@ export default function DirectPredictionPage() {
                 <Button
                     type="submit"
                     variant="gradient"
-                    disabled={isLoading || isTemplateLoading || activeTemplateId !== BINDER_TEMPLATE_ID}
+                    disabled={isLoading || isTemplateLoading || activeTemplateId !== PROPERTY_TEMPLATE_ID}
                 >
                     {isLoading ? (
                         <>

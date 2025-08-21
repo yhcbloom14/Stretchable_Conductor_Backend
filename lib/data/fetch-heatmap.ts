@@ -1,10 +1,21 @@
 import axios from 'axios'
+import { PROPERTY_TEMPLATE_ID, STRETCHABLE_ELECTRODE_TEMPLATE_ID } from '@/lib/constants'
 
-export const fetchHeatmap = async (inputs: any): Promise<any> => {
+export const fetchHeatmap = async (inputs: any, templateId?: string): Promise<any> => {
     try {
+        // Determine API configuration based on template
+        let projectId = "p5"  // Default for Property Template
+        let modelId = "v1124" // Default for Property Template
+        
+        // if (templateId === STRETCHABLE_ELECTRODE_TEMPLATE_ID) {
+        //     // Property template configuration
+        //     projectId = "property-template"  // Placeholder - needs actual project ID
+        //     modelId = "property-template-v1" // Placeholder - needs actual model ID
+        // }
+        
         const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/generate/heatmap`, {
-            project_id: "p5",
-            model_id: "v1124",
+            project_id: projectId,
+            model_id: modelId,
             data: {
                 ...inputs
             },

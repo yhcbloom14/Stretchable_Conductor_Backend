@@ -1,49 +1,111 @@
 "use server"
 
 import { Template } from "../types/Template";
-import { createClient } from "../utils/supabase/server";
-import { fetchProfile } from "./fetch-profile";
-import path from "path"
-import { promises as fs } from "fs"
 
-function getBaseUrl() {
-  if (typeof window !== 'undefined') {
-    return ''; 
-  }
-  return process.env.NEXT_PUBLIC_DEPLOY_URL;
-}
+// Embed template data directly to avoid filesystem/import issues on Vercel
+const propertyTemplateData: Template = {
+  "id": "82676d1e-075f-45f6-bb52-1c2f172d5458",
+  "name": "Stretchable Electrode",
+  "Formulation": [
+    {
+      "type": "num" as const,
+      "featureKey": "MXene (wt.%)",
+      "label": "MXene",
+      "min": 0,
+      "max": 100,
+      "std": 0.1
+    },
+    {
+      "type": "num" as const,
+      "featureKey": "SWNT (wt.%)",
+      "label": "SWNT",
+      "min": 0,
+      "max": 100,
+      "std": 0.1
+    },
+    {
+      "type": "num" as const,
+      "featureKey": "AuNP (wt.%)",
+      "label": "AuNP",
+      "min": 0,
+      "max": 100,
+      "std": 0.1
+    },
+    {
+      "type": "num" as const,
+      "featureKey": "PVA (wt.%)",
+      "label": "PVA",
+      "min": 0,
+      "max": 100,
+      "std": 0.1
+    }
+  ],
+  "Process": [
+    {
+      "type": "cat" as const,
+      "featureKey": "Deformation Sequence",
+      "label": "Deformation Sequence",
+      "options": ["G₁–1D", "G₁–2D", "G₂–2D1D", "G₂–2D2D"]
+    },
+    {
+      "type": "cat" as const,
+      "featureKey": "Applied Pre-Strain (%)",
+      "label": "Applied Pre-Strain (%)",
+      "options": ["0", "100", "200", "300"]
+    },
+    {
+      "type": "cat" as const,
+      "featureKey": "Thickness (nm)",
+      "label": "Thickness (nm)",
+      "options": ["800", "1,200", "1,600"]
+    }
+  ],
+  "Output": [
+    {
+      "type": "bool" as const,
+      "featureKey": "Feasibility",
+      "label": "Feasibility"
+    },
+    {
+      "type": "num" as const,
+      "featureKey": "S₀ (mS)",
+      "label": "S₀ (mS)",
+      "min": 2.62,
+      "max": 128.26,
+      "std": 0.01
+    },
+    {
+      "type": "num" as const,
+      "featureKey": "ε₁₀﹪ (%)",
+      "label": "ε₁₀﹪ (%)",
+      "min": 25.53,
+      "max": 691.06,
+      "std": 0.01
+    }
+  ]
+};
 
 export async function fetchTemplates(): Promise<Template[]> {
   const templates: Template[] = [];
 
-  // Define your template files (relative to public/)
+  // Define your template files with their embedded data
   const templateFiles = [
     {
       id: "82676d1e-075f-45f6-bb52-1c2f172d5458",
       name: "Stretchable Electrode",
-      file: "property-template.json", // this should be in your /public/ directory
+      data: propertyTemplateData,
     },
     // Add more templates here if needed
-    // { id: "...", name: "Binder Template", file: "binder-template.json" },
   ];
 
   for (const tmpl of templateFiles) {
     try {
-      // Use NEXT_PUBLIC_DEPLOY_URL to form absolute URL
-      const baseUrl = getBaseUrl();
-
-      const res = await fetch(`${baseUrl}/${tmpl.file}`);
-      if (!res.ok) {
-        throw new Error(`Failed to fetch ${tmpl.file}: ${res.statusText}`);
-      }
-
-      const json = await res.json();
-
       templates.push({
-        ...json,
+        ...tmpl.data,
         id: tmpl.id,
         name: tmpl.name,
       });
+      console.log(`Successfully loaded template: ${tmpl.name}`);
     } catch (error) {
       console.error(`Error loading template "${tmpl.name}":`, error);
     }
@@ -51,52 +113,4 @@ export async function fetchTemplates(): Promise<Template[]> {
 
   return templates;
 }
-
-
-// export async function fetchTemplates(): Promise<Template[]> {
-//     const supabase = await createClient();
-//     const profile = await fetchProfile()
-//     const org_id = profile.org_id;
-
-//     const {data: templateList, error: templateListError} = await supabase
-//     .from("templates")
-//     .select("id, name, path")
-//     .eq("org_id", org_id)
-//     .eq("is_deleted", false)
-//     .order('created_at', {ascending: true})
-
-//     if (templateListError) {
-//         throw Error(`${templateListError.name}: ${templateListError.message}`);
-//     }
-
-//     const templates: Template[] = [];
-
-//     for (const template of templateList) {
-//         const {data: downloadData, error: downloadError} = await supabase.storage
-//             .from("templates")
-//             .download(template.path)
-
-//         if (!res.ok) {
-//             throw Error(`${downloadError.name}: ${downloadError.message}`);
-//         }
-
-//         const fileContents = await downloadData?.text();
-
-//         if (!fileContents) {
-//             throw Error(`No template found for ${template.name}`);
-//         }
-
-//         try {
-//             templates.push({
-//                 ...JSON.parse(fileContents),
-//                 id: template.id,
-//                 name: template.name,
-//             });
-//         } catch (error) {
-//             throw error;
-//         }
-//     }
-
-//     return templates;
-// }
 

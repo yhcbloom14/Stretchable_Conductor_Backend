@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { Loader2 } from "lucide-react"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { selectProcess, selectMaterials } from "@/lib/store/slices/templateSlice"
+import { selectProcess, selectMaterials, selectActiveId } from "@/lib/store/slices/templateSlice"
 import { templateSlice } from '@/lib/store/slices/templateSlice';
 
 import HeatmapLazy from '@/components/heatmap-lazy'
@@ -23,6 +23,7 @@ export default function HeatmapPage() {
     const dispatch = useAppDispatch()
     const materials = useAppSelector(selectMaterials)
     const process = useAppSelector(selectProcess)
+    const activeTemplateId = useAppSelector(selectActiveId)
 
     const [isLoading, setIsLoading] = useState(false)
     const [inputError, setInputError] = useState<string | null>(null)
@@ -170,7 +171,7 @@ export default function HeatmapPage() {
             }
         })
         setIsLoading(true)
-        fetchHeatmap(payload)
+        fetchHeatmap(payload, activeTemplateId || undefined)
             .then((data) => {
                 console.log('Fetched sample:', data)
                 generatePlotData(data.predictions ?? [])

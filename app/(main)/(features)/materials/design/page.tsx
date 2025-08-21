@@ -7,7 +7,7 @@ import type { TableColumnsType } from 'antd';
 import { Popconfirm, Table } from 'antd';
 import Title from "@/components/common/title"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
-import { refreshTemplates, templateSlice, selectTemplates } from "@/lib/store/slices/templateSlice"
+import { refreshTemplates, templateSlice, selectTemplates, selectActiveId } from "@/lib/store/slices/templateSlice"
 import { ActionEnum } from "@/lib/types/Action"
 import { selectMaterials, selectProcess, selectOutputs, selectTemplateLoading } from "@/lib/store/slices/templateSlice"
 import DropdownInput from "@/components/common/dropdown-input"
@@ -55,6 +55,7 @@ export default function InverseDesignPage() {
 
     const dispatch = useAppDispatch()
     const templates = useAppSelector(selectTemplates)
+    const activeTemplateId = useAppSelector(selectActiveId)
     const materials = useAppSelector(selectMaterials)
     const parameters = useAppSelector(selectProcess)
     const outputs = useAppSelector(selectOutputs)
@@ -247,7 +248,7 @@ export default function InverseDesignPage() {
             },
             prediction_targets: outputDisplay
         }
-        fetchCluster(payload)
+        fetchCluster(payload, activeTemplateId || undefined)
             .then((data) => {
                 console.log('Fetched sample:', data)
                 generatePlotData(data)

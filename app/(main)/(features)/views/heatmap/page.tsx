@@ -14,7 +14,7 @@ import Button from '@/components/common/button';
 import { ActionEnum } from '@/lib/types/Action';
 import { fetchHeatmap } from '@/lib/data/fetch-heatmap';
 import { Alert } from 'antd';
-import { BINDER_TEMPLATE_ID } from '@/lib/constants';
+import { PROPERTY_TEMPLATE_ID } from '@/lib/constants';
 
 const MIN_REQUIRED_FEATURES = 2
 const MAX_REQUIRED_FEATURES = 3 
@@ -167,7 +167,7 @@ export default function HeatmapPage() {
             }
         })
         setIsLoading(true)
-        fetchHeatmap(payload)
+        fetchHeatmap(payload, activeTemplateId)
             .then((data) => {
                 generatePlotData(data.predictions ?? [])
                 setIsLoading(false)
@@ -194,7 +194,7 @@ export default function HeatmapPage() {
                 <Button
                     type="submit"
                     variant="gradient"
-                    disabled={isLoading || activeTemplateId !== BINDER_TEMPLATE_ID}
+                    disabled={isLoading || activeTemplateId !== PROPERTY_TEMPLATE_ID}
                 >
                     {isLoading ? (
                         <>

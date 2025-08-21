@@ -16,7 +16,7 @@ import { useEffect, useMemo } from "react";
 import { ColumnEnum, Column } from "@/lib/types/Column";
 import toast from "react-hot-toast";
 import { SkeletonTable, SkeletonTitle } from "@/components/common/skeleton-data";
-import binderTranslations from "@/lib/data/mock/binder-template-translation.json";
+// Translation logic removed - property template uses English labels
 
 interface DataContentProps {
     activeId: string
@@ -40,15 +40,8 @@ export default function DataContent({activeId}: DataContentProps) {
     const fileData = currentFile?.data
     const fileTemplateId = currentFile?.templateId
 
-    // Function to apply translations for Binder Template
+    // No translation needed - property template uses English labels
     const applyTranslation = (label: string, templateId?: string | null, templateName?: string | null): string => {
-        // Check if this is the Binder Template by name or ID
-        const isBinder = templateName === 'Binder Template' || 
-                        (currentTemplate?.name === 'Binder Template' && templateId === currentTemplate?.id);
-        
-        if (isBinder && binderTranslations[label as keyof typeof binderTranslations]) {
-            return binderTranslations[label as keyof typeof binderTranslations];
-        }
         return label;
     }
 

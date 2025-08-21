@@ -178,7 +178,7 @@ export default function DirectPredictionPage() {
         })
 
         if (activeTemplate?.id) {
-            fetchPredictions(payload)
+            fetchPredictions(payload, activeTemplate.id)
                 // TODO: fix data type
                 .then((data: any) => {
                     console.log('Fetched prediction:', data)

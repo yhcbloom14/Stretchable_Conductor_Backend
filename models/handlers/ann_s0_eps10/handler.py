@@ -118,7 +118,7 @@ class AnnS0Eps10Handler(BaseModelHandler):
         logger.info(f"s0: {s0_mean.item()}")
 
         # uncertainty
-        uncertainty = np.mean([eps10_covar, s0_covar]) * 100
+        uncertainty = np.mean([eps10_covar, s0_covar])
         logger.info(f"uncertainty (%): {uncertainty}")
 
         if uncertainty > 30:

@@ -64,7 +64,7 @@ export default function DirectPredictionPage() {
         const newData = tableRows.filter((item) => item.key !== key);
         setTableRows(newData);
     }
-    const generateTableData = (data: any) => {
+    const generateTableData = (data: any, inputData?: any) => {
         const results = data?.predictions || [];
 
         // Record the current number of rows to assign unique incremental keys
@@ -100,7 +100,8 @@ export default function DirectPredictionPage() {
 
         results.forEach((result: any, i: number) => {
             const predictions = result?.predictions || {};
-            const { materials = {}, parameters = {} } = result?.inputs || {};
+            // Use the input data passed from onSubmit, or fall back to result?.inputs
+            const { materials = {}, parameters = {} } = inputData || result?.inputs || {};
             const inputs = { ...materials, ...parameters };
 
             const rowKey = startIndex + i; // Ensure each row has a unique key
@@ -231,7 +232,7 @@ export default function DirectPredictionPage() {
                 // TODO: fix data type
                 .then((data: any) => {
                     console.log('Fetched prediction:', data)
-                    generateTableData(data)
+                    generateTableData(data, payload.inputs[0])
                     setIsLoading(false)
                     if (errorMsg) {
                         setErrorMsg('')
@@ -287,7 +288,7 @@ export default function DirectPredictionPage() {
             { key: 'deformation', parameter: 'Deformation Sequence', value: inputData['Deformation Sequence'] },
             { key: 'prestrain', parameter: 'Pre-strain (%)', value: inputData['Applied Pre-Strain (%)'] },
             { key: 'thickness', parameter: 'Thickness (nm)', value: inputData['Thickness (nm)'] }
-        ];
+        ].filter(item => item.value !== undefined && item.value !== null);
 
         return (
             <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
@@ -310,6 +311,7 @@ export default function DirectPredictionPage() {
                 ) : (
                     <div className="text-center py-4 text-gray-500 dark:text-gray-400">
                         <p>No input data available for this prediction</p>
+                        <p className="text-xs mt-1">This may occur if the backend service is not running</p>
                     </div>
                 )}
             </div>

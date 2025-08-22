@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useMemo, useCallback } from "react"
 import { PlotData } from 'plotly.js'
 import type { TableColumnsType } from 'antd';
-import { Popconfirm, Table } from 'antd';
+import { Popconfirm, Table, Input } from 'antd';
 import Title from "@/components/common/title"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import { refreshTemplates, templateSlice, selectTemplates, selectActiveId } from "@/lib/store/slices/templateSlice"
@@ -568,14 +568,19 @@ export default function InverseDesignPage() {
             <CollapsibleWrapper title="Section II – Set Uncertainty Cutoff">
                 <div className="flex flex-col gap-y-6">
                     <div className="flex items-center">
-                        <div className="text-sm font-bold w-[200px]">Uncertainty Cutoff</div>
-                        <DropdownInput
-                            className="[&>button]:min-w-0 w-auto"
-                            options={uncertaintyCutoffOptions}
-                            selected={uncertaintyCutoff}
-                            handleSelect={(selected) => {
-                                setUncertaintyCutoff(selected as number)
+                        <div className="text-sm font-bold w-[200px]">Uncertainty Cutoff (%)</div>
+                        <Input
+                            type="number"
+                            min={0}
+                            max={100}
+                            step={1}
+                            value={uncertaintyCutoff}
+                            onChange={(e) => {
+                                const value = parseInt(e.target.value) || 0;
+                                setUncertaintyCutoff(value);
                             }}
+                            className="w-32"
+                            placeholder="Enter value"
                         />
                     </div>
                 </div>

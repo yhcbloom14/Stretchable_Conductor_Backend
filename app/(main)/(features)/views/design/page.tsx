@@ -39,7 +39,6 @@ export default function InverseDesignPage() {
     const [materialRanges, setMaterialRanges] = useState<Record<string, Record<string, number>>>({})
     const [processParams, setProcessParams] = useState<Record<string, Record<string, number | string[]>>>({})
     const [outputParams, setOutputParams] = useState<Record<string, Record<string, number | string[]>>>({})
-    const [outputDisplayOptions, setOutputDisplayOptions] = useState<Record<string, string>[]>([])
     const [outputDisplay, setOutputDisplay] = useState<string[]>([])
     const [uncertaintyCutoff, setUncertaintyCutoff] = useState<number>(30)
     const [tableRows, setTableRows] = useState<Record<string, any>[]>([])
@@ -118,18 +117,17 @@ export default function InverseDesignPage() {
         }, {})
     }, [outputs])
 
-    const memoizedOutputDisplayOptions = useMemo(() => {
-        return outputs
-        .filter(output => !['Feasibility'].includes(output.featureKey))
-        .map(output => ({
-            id: output.featureKey,
-            label: output.label,
-            value: output.featureKey
-        }))
-    }, [outputs]);
+
 
     const memoizedOutputDisplay = useMemo(() => {
-        return [outputs[0]?.featureKey || '', outputs[1]?.featureKey || '']
+        // Automatically set X-axis to ε₁₀% and Y-axis to S₀ (mS)
+        const eps10Output = outputs.find(output => output.featureKey === "ε₁₀﹪ (%)")
+        const s0Output = outputs.find(output => output.featureKey === "S₀ (mS)")
+        
+        return [
+            eps10Output?.featureKey || '', // X-axis: ε₁₀%
+            s0Output?.featureKey || ''     // Y-axis: S₀ (mS)
+        ]
     }, [outputs])
 
     // Update state only when memoized values change
@@ -144,10 +142,6 @@ export default function InverseDesignPage() {
     useEffect(() => {
         setOutputParams(memoizedOutputParams)
     }, [memoizedOutputParams])
-
-    useEffect(() => {
-        setOutputDisplayOptions(memoizedOutputDisplayOptions)
-    }, [memoizedOutputDisplayOptions])
 
     useEffect(() => {
         setOutputDisplay(memoizedOutputDisplay)
@@ -571,55 +565,8 @@ export default function InverseDesignPage() {
                 )
             }
             </CollapsibleWrapper>
-            <CollapsibleWrapper title="Section II – Determine Model Output Display and Set Uncertainty Cutoff">
+            <CollapsibleWrapper title="Section II – Set Uncertainty Cutoff">
                 <div className="flex flex-col gap-y-6">
-                    {outputDisplayOptions?.length > 0 &&
-                        <div className="flex items-center">
-                            <div className="text-sm font-bold w-[200px]">Model Output Display</div>
-                            <div className="flex items-center gap-x-6">
-                                <div className="flex items-center gap-x-2">
-                                    <span>X </span>
-                                        <DropdownInput
-                                            className="[&>button]:min-w-0 w-auto"
-                                            options={outputDisplayOptions.map(option => {
-                                                if (option.id === outputDisplay[1]) {
-                                                return {
-                                                        ...option,
-                                                        disabled: true
-                                                }
-                                                }
-                                                return option
-                                            })
-                                        }
-                                        selected={outputDisplay[0]}
-                                        handleSelect={(selected) => {
-                                            setOutputDisplay(prev => [selected, prev[1]] as string[])
-                                        }}
-                                    />
-                                </div>
-                                <div className="flex items-center gap-x-2">
-                                    <span>Y </span>
-                                    <DropdownInput
-                                        className="[&>button]:min-w-0 w-auto"
-                                        options={outputDisplayOptions.map(option => {
-                                            if (option.id === outputDisplay[0]) {
-                                                return {
-                                                    ...option,
-                                                    disabled: true
-                                                }
-                                                }
-                                                return option
-                                            })
-                                        }
-                                        selected={outputDisplay[1]}
-                                        handleSelect={(selected) => {
-                                            setOutputDisplay(prev => [prev[0], selected] as string[])
-                                        }}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    }
                     <div className="flex items-center">
                         <div className="text-sm font-bold w-[200px]">Uncertainty Cutoff</div>
                         <DropdownInput
@@ -639,7 +586,7 @@ export default function InverseDesignPage() {
                     <SkeletonChart />
                 ) : (
                     <HeatmapLazy
-                        title=""
+                        title="ε₁₀% vs S₀ (mS) Relationship"
                         plotData={plotData}
                         layoutConfig={{
                             margin: {
@@ -650,7 +597,7 @@ export default function InverseDesignPage() {
                             },
                             xaxis: { 
                                 title: { 
-                                    text: outputDisplayOptions.find(option => option.id === outputDisplay[0])?.label || 'X',
+                                    text: 'ε₁₀%',
                                     font: {
                                         family: 'var(--font-inter), sans-serif',
                                         size: 16
@@ -663,7 +610,7 @@ export default function InverseDesignPage() {
                             },
                             yaxis: { 
                                 title: { 
-                                    text: outputDisplayOptions.find(option => option.id === outputDisplay[1])?.label || 'Y',
+                                    text: 'S₀ (mS)',
                                     font: {
                                         family: 'var(--font-inter), sans-serif',
                                         size: 16

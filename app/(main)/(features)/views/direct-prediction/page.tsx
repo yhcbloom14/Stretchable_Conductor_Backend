@@ -251,20 +251,70 @@ export default function DirectPredictionPage() {
         }
     }
     const isTableDataAvailable = tableRows.length > 0 && tableColumns.length > 0
-    const expandedRowRender = (record: any) => (
-        <Table
-            columns={expandColumns.current.map(column => ({
-                ...column,
-                render: (val) => <span key={column.key}>{isNaN(val) ? val : val.toFixed(2) }</span>
-            }))}
-            dataSource={[expandDataSource.current.find(data => {
-                console.log('data: ', data)
-                console.log('record: ', record)
-                return data.key === record.key
-            }) || {}]}
-            pagination={false}
-        />
-    )
+    const expandedRowRender = (record: any) => {
+        const inputData = expandDataSource.current.find(data => data.key === record.key) || {};
+        
+        // Define the detailed view columns with proper labels
+        const detailColumns = [
+            {
+                title: 'Parameter',
+                dataIndex: 'parameter',
+                key: 'parameter',
+                width: '40%',
+                render: (text: string) => <span className="font-medium">{text}</span>
+            },
+            {
+                title: 'Value',
+                dataIndex: 'value',
+                key: 'value',
+                width: '60%',
+                render: (val: any) => {
+                    if (val === null || val === undefined) return <span className="text-gray-400">N/A</span>;
+                    if (typeof val === 'number') {
+                        return <span>{isNaN(val) ? 'N/A' : val.toFixed(2)}</span>;
+                    }
+                    return <span>{val}</span>;
+                }
+            }
+        ];
+
+        // Map the input data to the detailed view format
+        const detailData = [
+            { key: 'mxene', parameter: 'MXene (wt.%)', value: inputData['MXene (wt.%)'] },
+            { key: 'swnt', parameter: 'SWNT (wt.%)', value: inputData['SWNT (wt.%)'] },
+            { key: 'aunp', parameter: 'AuNP (wt.%)', value: inputData['AuNP (wt.%)'] },
+            { key: 'pva', parameter: 'PVA (wt.%)', value: inputData['PVA (wt.%)'] },
+            { key: 'deformation', parameter: 'Deformation Sequence', value: inputData['Deformation Sequence'] },
+            { key: 'prestrain', parameter: 'Pre-strain (%)', value: inputData['Applied Pre-Strain (%)'] },
+            { key: 'thickness', parameter: 'Thickness (nm)', value: inputData['Thickness (nm)'] }
+        ];
+
+        return (
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                <div className="mb-3">
+                    <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        Input Parameters Details
+                    </h4>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                        Detailed view of the input parameters used for this prediction
+                    </p>
+                </div>
+                {Object.keys(inputData).length > 0 ? (
+                    <Table
+                        columns={detailColumns}
+                        dataSource={detailData}
+                        pagination={false}
+                        size="small"
+                        className="detail-table"
+                    />
+                ) : (
+                    <div className="text-center py-4 text-gray-500 dark:text-gray-400">
+                        <p>No input data available for this prediction</p>
+                    </div>
+                )}
+            </div>
+        );
+    }
     const tableColumnsWithActions = [
         ...tableColumns,
         {
@@ -316,14 +366,67 @@ export default function DirectPredictionPage() {
                 {errorMsg && <Alert className="w-fit" message={errorMsg} type="error" showIcon />}
             </form>
             {isTableDataAvailable && (
-                <Table
-                    bordered
-                    columns={tableColumnsWithActions}
-                    expandable={{ expandedRowRender, defaultExpandedRowKeys: ['0'] }}
-                    dataSource={tableRows}
-                    pagination={false}
-                    size="small"
-                />
+                <>
+                    <style jsx>{`
+                        .detail-table .ant-table-thead > tr > th {
+                            background-color: #f8fafc;
+                            border-bottom: 1px solid #e2e8f0;
+                            font-weight: 600;
+                            color: #475569;
+                        }
+                        .detail-table .ant-table-tbody > tr > td {
+                            border-bottom: 1px solid #f1f5f9;
+                        }
+                        .detail-table .ant-table-tbody > tr:hover > td {
+                            background-color: #f1f5f9;
+                        }
+                        .dark .detail-table .ant-table-thead > tr > th {
+                            background-color: #1e293b;
+                            border-bottom: 1px solid #334155;
+                            color: #cbd5e1;
+                        }
+                        .dark .detail-table .ant-table-tbody > tr > td {
+                            border-bottom: 1px solid #334155;
+                        }
+                        .dark .detail-table .ant-table-tbody > tr:hover > td {
+                            background-color: #334155;
+                        }
+                        
+                        /* Make expand icon more prominent */
+                        .ant-table-expand-icon-col .ant-table-row-expand-icon {
+                            background-color: #3b82f6;
+                            border-color: #3b82f6;
+                            color: white;
+                            border-radius: 4px;
+                            width: 20px;
+                            height: 20px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 12px;
+                        }
+                        .ant-table-expand-icon-col .ant-table-row-expand-icon:hover {
+                            background-color: #2563eb;
+                            border-color: #2563eb;
+                        }
+                        .dark .ant-table-expand-icon-col .ant-table-row-expand-icon {
+                            background-color: #60a5fa;
+                            border-color: #60a5fa;
+                        }
+                        .dark .ant-table-expand-icon-col .ant-table-row-expand-icon:hover {
+                            background-color: #3b82f6;
+                            border-color: #3b82f6;
+                        }
+                    `}</style>
+                    <Table
+                        bordered
+                        columns={tableColumnsWithActions}
+                        expandable={{ expandedRowRender, defaultExpandedRowKeys: ['0'] }}
+                        dataSource={tableRows}
+                        pagination={false}
+                        size="small"
+                    />
+                </>
             )}
         </>
     )

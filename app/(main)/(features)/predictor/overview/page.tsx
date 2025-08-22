@@ -12,7 +12,7 @@ export default function Page() {
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Overview</h2>
                 <h3 className="text-xl font-semibold mt-4">Platform Motivation</h3>
                 <p>
-                  The widespread adoption of stretchable nanocomposites faces several key challenges, including (1) the lack of comprehensive, high-quality experimental datasets, (2) inefficient dissemination mechanisms that limit collaboration among diverse stakeholders, and (3) absence of accessible data platforms and user-friendly visualization tools. To address these persistent challenges, we have established a data-sharing platform that compiles approximately 150k feasible fabrication parameters of G₁/G₂ stretchable nanocomposites, along with their machine learning (ML)-predicted properties (S₀ and ε₁₀﹪) and prediction uncertainties. This platform is part of a research project led by Dr. Po-Yen Chen’s group at the University of Maryland, College Park.
+                  The widespread adoption of stretchable nanocomposites faces several key challenges, including (1) the lack of comprehensive, high-quality experimental datasets, (2) inefficient dissemination mechanisms that limit collaboration among diverse stakeholders, and (3) absence of accessible data platforms and user-friendly visualization tools. To address these persistent challenges, we have established a data-sharing platform that compiles approximately 150k feasible fabrication parameters of G₁/G₂ stretchable nanocomposites, along with their machine learning (ML)-predicted properties (S₀ and ε₁₀%) and prediction uncertainties. This platform is part of a research project led by Dr. Po-Yen Chen's group at the University of Maryland, College Park.
                 </p>
                 {/* <ul className="list-disc ml-6 space-y-1">
                   <li>Limited availability of user-friendly, no-code ML tools that can effectively train robust predictive models, especially with small or sparse datasets;</li>
@@ -27,7 +27,7 @@ export default function Page() {
                   This data-sharing platform features two key functionalities <b>forward prediction</b> and <b>inverse design</b>.
                 </p>
                 <p>
-                  In the <b>forward prediction</b> tab, users can select a set of composition and fabrication parameters from Section I and II, respectively. The platform then uses its embedded prediction models to forecast the feasibility of filtered nanocomposite, S₀, ε₁₀﹪, and prediction uncertainties from the selected parameters.
+                  In the <b>forward prediction</b> tab, users can select a set of composition and fabrication parameters from Section I and II, respectively. The platform then uses its embedded prediction models to forecast the feasibility of filtered nanocomposite, S₀, ε₁₀%, and prediction uncertainties from the selected parameters.
                 </p>
                 <p>
                   In the <b>inverse design</b>, users can specify target property requirements, prompting the platform to perform cluster analyses using the embedded ML-enabled prediction model. The platform then recommends the most suitable composition and fabrication parameters, enabling users to interactively optimize stretchable nanocomposites.

@@ -75,7 +75,7 @@ export const stretchableElectrodeTemplate: Template = {
         {
             type: "num",
                     featureKey: "ε₁₀﹪ (%)",
-        label: "ε₁₀%",
+        label: "ε₁₀% (%)",
             min: 25.53,
             max: 691.06,
             std: 0.01

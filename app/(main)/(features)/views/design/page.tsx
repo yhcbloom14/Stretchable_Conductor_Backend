@@ -586,7 +586,7 @@ export default function InverseDesignPage() {
                     <SkeletonChart />
                 ) : (
                     <HeatmapLazy
-                        title="ε₁₀% vs S₀ (mS) Relationship"
+                        title="ε₁₀% (%) vs S₀ (mS) Relationship"
                         plotData={plotData}
                         layoutConfig={{
                             margin: {
@@ -597,7 +597,7 @@ export default function InverseDesignPage() {
                             },
                             xaxis: { 
                                 title: { 
-                                    text: 'ε₁₀%',
+                                    text: 'ε₁₀% (%)',
                                     font: {
                                         family: 'var(--font-inter), sans-serif',
                                         size: 16

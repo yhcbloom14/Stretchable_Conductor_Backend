@@ -345,10 +345,11 @@ export default function DirectPredictionPage() {
                 ) : (
                     <TemplateForm
                       formulationInputTitle="Section I – Composition Parameter Inputs"
-                      processInputTitle="Section II – Fabrication Parameter Inputs"
-                      processInputSubTitle="Processing Parameters"
+                      processInputTitle="Section II – Other Inputs"
+                      processInputSubTitle=" "
                       formulationInputTitleConfig={{
-                          compositionInputTitle: "Composition Parameters",
+                    //compositionInputTitle: "Composition Parameters",
+                    compositionInputTitle: " ",
                       }} isSelectable={false} />
                 )}
                 <Button

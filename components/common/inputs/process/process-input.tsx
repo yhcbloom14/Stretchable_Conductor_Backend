@@ -169,7 +169,7 @@ function ProcessInput({ isSelectable = true, title = "" }: { isSelectable?: bool
                 <Card>
                     <div className="px-5 py-4">
                         <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-4">
-                            {title || "Process Parameters"}
+                            {title || ""}
                         </h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-start">
                             {

@@ -143,9 +143,10 @@ function CompositionInput({ title = "", removeCompositionIndicator = false }: { 
                     {renderedSegments}
                 </div>
                 {/* Grey text positioned to the right of the material inputs, moved down to center with boxes */}
-                <div className="absolute -right-12 top-8 text-xs text-gray-500 dark:text-gray-400 [&_span]:block min-w-[180px] max-w-[280px]">
+                <div className="absolute -right-28 top-8 text-xs text-gray-500 dark:text-gray-400 [&_span]:block min-w-[180px] max-w-[280px]">
                     <span>MXene: Ti₃C₂Tₓ MXene</span>
-                    <span>SWNT: Single-Walled Carbon Nanotube</span>
+                    <span>SWNT: Single-Walled</span>
+                    <span className="ml-8">Carbon Nanotube</span>
                     <span>AuNP: Gold Nanoparticle</span>
                     <span>PVA: Polyvinyl Alcohol</span>
                     <span>UL: Upper Limit (wt. %)</span>

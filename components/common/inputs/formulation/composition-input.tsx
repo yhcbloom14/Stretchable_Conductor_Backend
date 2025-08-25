@@ -11,12 +11,51 @@ import RangeInput from "../range-input"
 import { AlertCircle } from "lucide-react"
 import { InputNumber } from 'antd';
 
+// Custom hook for dynamic viewport detection
+function useViewportSize() {
+    const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 })
+    
+    useEffect(() => {
+        const updateSize = () => {
+            setViewportSize({
+                width: window.innerWidth,
+                height: window.innerHeight
+            })
+        }
+        
+        // Set initial size
+        updateSize()
+        
+        // Add event listener
+        window.addEventListener('resize', updateSize)
+        
+        // Cleanup
+        return () => window.removeEventListener('resize', updateSize)
+    }, [])
+    
+    return viewportSize
+}
+
+// Function to calculate optimal text position based on viewport width
+function getTextPosition(width: number) {
+    if (width < 640) return { right: '0', top: '2rem', position: 'relative' as const }
+    if (width < 768) return { right: '-4.5rem', top: '2rem' }
+    if (width < 1024) return { right: '-5.5rem', top: '2rem' }
+    if (width < 1280) return { right: '-6.5rem', top: '2rem' }
+    if (width < 1536) return { right: '-7.5rem', top: '2rem' }
+    return { right: '-8.5rem', top: '2rem' }
+}
+
 function CompositionInput({ title = "", removeCompositionIndicator = false }: { title?: string, removeCompositionIndicator?: boolean }) {
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const router = useRouter()
     const materials = useAppSelector(selectMaterials)
     const [segments, setSegments] = useState<CompositionSegment[]>([])
+    
+    // Dynamic viewport detection
+    const { width: viewportWidth } = useViewportSize()
+    const textPosition = getTextPosition(viewportWidth)
 
 
     // TODO: remove this after MVP demo
@@ -132,7 +171,7 @@ function CompositionInput({ title = "", removeCompositionIndicator = false }: { 
         }), [segments, updateValue])
 
     return (
-        <div className="grid sm:grid-cols-6 px-5 py-4 items-center">
+        <div className="grid sm:grid-cols-6 px-5 py-4 items-start">
                 <div className="flex flex-col h-full relative">
                     <div className="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-2 sm:mb-0 mt-8">
                         {title || "Formulation"}
@@ -142,8 +181,17 @@ function CompositionInput({ title = "", removeCompositionIndicator = false }: { 
                 <div className="flex flex-row flex-wrap gap-4 items-start">
                     {renderedSegments}
                 </div>
-                {/* Grey text positioned to the right of the material inputs, moved down to center with boxes */}
-                <div className="absolute -right-28 top-8 text-xs text-gray-500 dark:text-gray-400 [&_span]:block min-w-[180px] max-w-[280px]">
+                {/* Dynamic grey text that adjusts position based on actual viewport size */}
+                <div 
+                    className={`text-xs text-gray-500 dark:text-gray-400 [&_span]:block min-w-[180px] max-w-[280px] ${
+                        viewportWidth < 640 ? 'mt-4' : 'absolute'
+                    }`}
+                    style={{
+                        right: textPosition.right,
+                        top: textPosition.top,
+                        position: textPosition.position || 'absolute'
+                    }}
+                >
                     <span>MXene: Ti₃C₂Tₓ MXene</span>
                     <span>SWNT: Single-Walled</span>
                     <span className="ml-8">Carbon Nanotube</span>

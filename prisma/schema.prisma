@@ -1,0 +1,61 @@
+// Unified schema for LeafyLab Platform
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Core user and organization models
+model User {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  name              String
+  role              Role     @default(EDITOR)
+  last_sign_in_at   DateTime?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  
+  // Relations
+  organization_id   String?
+  organization      Organization? @relation(fields: [organization_id], references: [id])
+  
+
+  
+  @@map("users")
+}
+
+model Organization {
+  id          String   @id @default(cuid())
+  name        String
+  domain      String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  
+  // Relations
+  users       User[]
+  
+  @@map("organizations")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+{
+    "id": "82676d1e-075f-45f6-bb52-1c2f172d5458",
+    "name": "Stretchable Electrode",
+    "Formulation": [
+        {
+            "type": "num",
+            "featureKey": "MXene (wt.%)",
+            "label": "MXene",
+            "min": 0,
+            "max": 100,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "SWNT (wt.%)",
+            "label": "SWNT",
+            "min": 0,
+            "max": 100,
+            "std": 0.1
+        }, 
+        {
+            "type": "num",
+            "featureKey": "AuNP (wt.%)",
+            "label": "AuNP",
+            "min": 0,
+            "max": 100,
+            "std": 0.1
+        },
+        {
+            "type": "num",
+            "featureKey": "PVA (wt.%)",
+            "label": "PVA",
+            "min": 0,
+            "max": 100,
+            "std": 0.1
+        }
+    ],
+    "Process": [
+        {
+           "type": "cat",
+           "featureKey": "Deformation Sequence",
+           "label": "Deformation Sequence",
+           "options": ["G₁–1D", "G₁–2D", "G₂–2D1D", "G₂–2D2D"] 
+        },
+        {
+            "type": "cat",
+            "featureKey": "Applied Pre-Strain (%)",
+            "label": "Applied Pre-Strain (%)",
+            "options": ["0", "100", "200", "300"] 
+        },
+        {
+            "type": "cat",
+            "featureKey": "Thickness (nm)",
+            "label": "Thickness (nm)",
+            "options": ["800", "1,200","1,600"] 
+        }
+    ],
+    "Output": [
+        {
+            "type": "bool",
+            "featureKey": "Feasibility",
+            "label": "Feasibility"
+        },
+        {
+            "type": "num",
+            "featureKey": "S₀ (mS)",
+            "label": "S₀ (mS)",
+            "min": 2.62,
+            "max": 128.26,
+            "std": 0.01
+        },
+        {
+            "type": "num",
+                "featureKey": "ε₁₀﹪ (%)",
+    "label": "ε₁₀% (%)",
+            "min": 25.53,
+            "max": 691.06,
+            "std": 0.01
+        }
+    ] 
+}

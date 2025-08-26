@@ -39,11 +39,11 @@ function useViewportSize() {
 // Function to calculate optimal text position based on viewport width
 function getTextPosition(width: number) {
     if (width < 640) return { right: '0', top: '2rem', position: 'relative' as const }
-    if (width < 768) return { right: '-4.5rem', top: '2rem' }
-    if (width < 1024) return { right: '-5.5rem', top: '2rem' }
-    if (width < 1280) return { right: '-6.5rem', top: '2rem' }
-    if (width < 1536) return { right: '-7.5rem', top: '2rem' }
-    return { right: '-8.5rem', top: '2rem' }
+    if (width < 768) return { right: '-2.75rem', top: '2rem' }
+    if (width < 1024) return { right: '-3.75rem', top: '2rem' }
+    if (width < 1280) return { right: '-4.75rem', top: '2rem' }
+    if (width < 1536) return { right: '-5.75rem', top: '2rem' }
+    return { right: '-6.75rem', top: '2rem' }
 }
 
 function CompositionInput({ title = "", removeCompositionIndicator = false }: { title?: string, removeCompositionIndicator?: boolean }) {

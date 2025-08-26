@@ -45,9 +45,9 @@ export default function DropdownNotifications({ align }: {
                 {({ active }) => (
                   <div className={`block py-2 px-4 ${active && 'bg-gray-50 dark:bg-gray-700/20'}`}>
                     <span className="block text-sm mb-2">
-                      📣 <span className="font-medium text-gray-800 dark:text-gray-100">Predictor Module Release</span>
+                      📣 <span className="font-medium text-gray-800 dark:text-gray-100">Platform Release</span>
                     </span>
-                    <span className="block text-xs font-medium text-gray-400 dark:text-gray-500">Mar 5, 2025</span>
+                    <span className="block text-xs font-medium text-gray-400 dark:text-gray-500">Aug 25, 2025</span>
                   </div>
                 )}
               </MenuItem>
